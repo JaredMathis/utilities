@@ -12,6 +12,7 @@ module.exports = {
     range,
     isFunction,
     isString,
+    throws,
 }
 
 function isArray(a) {
@@ -57,4 +58,13 @@ function range(count, start) {
         result.push(i);
     }
     return result;
+}
+
+function throws(lambda) {
+    try {
+        lambda();
+        return false;
+    } catch (e) {
+        return true;
+    }
 }

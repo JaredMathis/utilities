@@ -53,7 +53,7 @@ function assert(b, exitLambda) {
 function assertError(exitLambda) {
     return logIndent(assertError.name, context => {
         logProperties(context);
-
+        
         if (isUndefined(exitLambda)) {
             exitLambda = processExit;
         }
