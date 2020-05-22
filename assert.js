@@ -98,9 +98,9 @@ function assertIsEqual(left, right) {
 function assertIsEqualJson(left, right) {
     return logIndent(assertIsEqualJson.name, context => {
         merge(context, {left});
-        assertIsDefined(left);
-
         merge(context, {right});
+
+        assertIsDefined(left);
         assertIsDefined(right);
 
         let equals = JSON.stringify(left) === JSON.stringify(right);
