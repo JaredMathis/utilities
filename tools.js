@@ -2,6 +2,8 @@ const {
     isArray,
     isFunction,
     isDefined,
+    isString,
+    isInteger,
 } = require('./core');
 
 const {
@@ -17,6 +19,7 @@ const {
 module.exports = {
     loop,
     toDictionary,
+    isArrayIndex,
 };
 
 /**
@@ -31,17 +34,15 @@ function loop(array, lambda) {
         assert(() => isArray(array));
         assert(() => isFunction(lambda));
     
-        let iterations = 0;
-        for (let i = 0; i < array.length; i++) {
-            iterations++;
-            let a = array[i];
-            let breakLoop = lambda(a, i);
+        for (let index = 0; index < array.length; index++) {
+            merge(context, {index});
+            let iteration = array[index];
+            merge(context, {iteration});
+            let breakLoop = lambda(iteration, index);
             if (breakLoop) {
                 break;
             }
         }
-
-        if (log) consoleLog({iterations});
     })
 }
 
@@ -63,4 +64,10 @@ function toDictionary(array, property) {
     })
 
     return result;
+}
+
+function isArrayIndex(array, index) {
+    assert(() => isArray(array) || isString(array));
+    assert(() => isInteger(index));
+    return 0 <= index && index < array.length;
 }

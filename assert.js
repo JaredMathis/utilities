@@ -53,7 +53,6 @@ function assert(b, exitLambda) {
 function assertError(exitLambda) {
     return logIndent(assertError.name, context => {
         logProperties(context);
-        
         if (isUndefined(exitLambda)) {
             exitLambda = processExit;
         }
@@ -87,7 +86,22 @@ function assertIsEqual(left, right) {
         merge(context, {right});
         assertIsDefined(right);
 
-        let equals = left === right;
+        let leftValue;
+        if (isFunction(left)) {
+            leftValue = left();
+        } else {
+            leftValue = left;
+        }
+        merge(context, {leftValue});
+        let rightValue;
+        if (isFunction(right)) {
+            rightValue = right();
+        } else {
+            rightValue = right;
+        }
+        merge(context, {rightValue});
+
+        let equals = leftValue === rightValue;
         if (equals) {
             return;
         }

@@ -162,6 +162,5 @@ function consoleLog(message) {
         logProperties(message);
     }
 
-    
     if (log) console.log('consoleLog leaving');
 }
