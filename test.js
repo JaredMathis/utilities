@@ -1,8 +1,13 @@
 require('./tests/isArrayIndex');
 require('./tests/arrayCount');
 require('./tests/to3Sat');
-require('./tests/exact1_3Satisfied');
+require('./tests/e1n3SatValidSolution');
 require('./tests/gauss');
+require('./tests/rref');
+require('./tests/e1n3SatToMatrix');
+require('./tests/identityPrefixOfSize');
+require('./tests/identityPrefix');
+require('./tests/e1n3SatConsistent');
 
 let external = false;
 if (external) {

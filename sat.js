@@ -10,11 +10,20 @@ const {
     arrayCount,
     logIndent,
     merge,
+    arrayMin,
+    isUndefined,
+    arrayAll,
 } = require('./all');
+
+const rref = require('rref');
 
 module.exports = {
     to3Sat,
-    exact1_3Satisfied,
+    e1n3SatValidSolution,
+    e1n3SatToMatrix,
+    identityPrefix,
+    identityPrefixOfSize,
+    e1n3SatConsistent,
 };
 
 function isLiteral(v) {
@@ -38,7 +47,7 @@ function assertIsValidClauses(clauses) {
     })
 }
 
-function vertices(clauses) {
+function getVariables(clauses) {
     assertIsValidClauses(clauses);
 
     let max = 0;
@@ -62,7 +71,7 @@ function getMaxVariable(clauses) {
     logIndent(getMaxVariable.name, context => {
         assertIsValidClauses(clauses);
 
-        let v = vertices(clauses);
+        let v = getVariables(clauses);
         max = arrayMax(v);    
     });
     return max;
@@ -127,6 +136,37 @@ function to3Sat(clauses) {
     return result;
 }
 
+function toAll3Sat(clauses) {
+    let result;
+    logIndent(toAll3Sat.name, context => {
+        clauses = to3Sat(clauses);
+
+        let max = getMaxVariable(clauses);
+        let a = max + 1;
+        let b = max + 2;
+
+        result = [];
+
+        loop(clauses, c => {
+            if (c.length === 3) {
+                result.push(c);
+                return;
+            }
+            if (c.length === 2) {
+                result.push([c[0], c[1], a]);
+                return;
+            }
+            if (c.length === 1) {
+                result.push([c[0], b, a]);
+                return;
+            }
+            assert(false);
+        })
+    });
+
+    return result;
+}
+
 function assertIs3Sat(clauses) {
     logIndent(assertIs3Sat.name, context => {
         assertIsValidClauses(clauses);
@@ -137,8 +177,18 @@ function assertIs3Sat(clauses) {
     });
 }
 
-function toExact1_3Sat(clauses) {
-    clauses = to3Sat(clauses);
+function assertIsAll3Sat(clauses) {
+    logIndent(assertIs3Sat.name, context => {
+        assertIsValidClauses(clauses);
+
+        loop(clauses, c => {
+            assert(() => c.length === 3);
+        });
+    });
+}
+
+function toe1n3Sat(clauses) {
+    clauses = toAll3Sat(clauses);
 
     let max = getMaxVariable(clauses);
 
@@ -157,9 +207,9 @@ function toExact1_3Sat(clauses) {
     });
 }
 
-function exact1_3Satisfied(clauses, solution) {
+function e1n3SatValidSolution(clauses, solution) {
     let result = true;
-    logIndent(exact1_3Satisfied.name, context => {
+    logIndent(e1n3SatValidSolution.name, context => {
         let log = false;
         if (log) console.log({solution});
         if (log) console.log({clauses});
@@ -178,5 +228,101 @@ function exact1_3Satisfied(clauses, solution) {
         });
     });
 
+    return result;
+}
+
+function e1n3SatToMatrix(clauses) {
+    let matrix = [];
+
+    logIndent(e1n3SatToMatrix.name, context => {
+        assertIsAll3Sat(clauses);
+
+        let variables = getVariables(clauses);
+
+        loop(variables, v => {
+            let part = variables.map(w => w === v ? 1 : 0);
+            let full = part.concat(part).concat([0]);
+            matrix.push(full);
+        });
+
+        loop(clauses, c => {
+            let left = variables.map(v => c.includes(v) ? 1 : 0);
+            let right = variables.map(v => c.includes(-v) ? 1 : 0);
+            let last = [-1];
+            let full = left.concat(right).concat(last);
+            matrix.push(full);
+        });
+
+    });
+
+    return matrix;
+}
+
+function e1n3SatConsistent(clauses) {
+    let result = true;
+
+    logIndent(e1n3SatConsistent.name, context => {
+        let matrix = e1n3SatToMatrix(clauses);
+        let reduced = rref(matrix);
+        let p = identityPrefix(reduced);
+
+        loop(reduced, row =>{
+            let remaining = row.slice(p);
+            if (arrayAll(remaining, r => r === 0)) {
+                result = false;
+                return true;
+            }
+        });
+    });
+
+    return result;
+}
+
+function identityPrefixOfSize(matrix, size) {
+    let valid = true;
+
+    logIndent(identityPrefixOfSize.name, context => {
+        merge(context, {size});
+        assert(() => isInteger(size));
+
+        loop(range(size, 0), row => {
+            let r = matrix[row];
+            if (isUndefined(r)) {
+                valid = false;
+            }
+            if (!valid) {
+                return true;
+            }
+            loop(range(size, 0), col => {
+                if (row === col) {
+                    if (r[col] !== 1) {
+                        valid = false;
+                        return true;
+                    }
+                } else {
+                    if (r[col] !== 0) {
+                        valid = false;
+                        return true;
+                    }
+                }
+            });
+        });
+    })
+
+    return valid;
+}
+
+function identityPrefix(matrix) {
+    let result;
+    logIndent(identityPrefix.name, context => {
+        let lesser = arrayMin([matrix.length, matrix[0].length]);
+        loop(range(lesser + 1), size=> {
+            if (identityPrefixOfSize(matrix, size)) {
+                result = size;
+            } else {
+                return true;
+            }
+        });
+    });
     return result;
 }

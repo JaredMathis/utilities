@@ -1,7 +1,7 @@
 
 const {
-    exact1_3Satisfied,
-} = require('./../sat');
+    e1n3SatValidSolution,
+} = require('../sat');
 
 const {
     loop,
@@ -14,11 +14,11 @@ const {
     arrayMax,
     arrayCount,
     logIndent,
-} = require('./../all');
+} = require('../all');
 
 logIndent(__filename, context => {
     let solution = [1,-2,-3];
     let clauses = [[1,2,3]];
 
-    assert(() => exact1_3Satisfied(clauses, solution));
+    assert(() => e1n3SatValidSolution(clauses, solution));
 });

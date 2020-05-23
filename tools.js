@@ -26,7 +26,9 @@ module.exports = {
     isDistinct,
     loopPairs,
     arrayMax,
+    arrayMin,
     arrayCount,
+    arrayMin,
 };
 
 /**
@@ -99,6 +101,23 @@ function arrayMax(array) {
     });
 
     return max;
+}
+function arrayMin(array) {
+    let min;
+
+    logIndent(arrayAll.name, context => {
+        assert(() => isArray(array));
+        
+        min = array[0]
+
+        loop(array, a => {
+            if (a < min) {
+                min = a;
+            }
+        })
+    });
+
+    return min;
 }
 
 /**

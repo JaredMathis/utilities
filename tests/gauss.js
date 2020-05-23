@@ -21,7 +21,7 @@ function gauss(matrix, result) {
     var system = new GaussianElimination().solve(
         matrixToBigNumber(matrix), 
         arrayToBigNumber(result));
-    let s = system.solution.map(s => s.toFixed());
+    let s = system.solution.map(s => s.toNumber());
     return s;
 }
 
@@ -36,7 +36,7 @@ logIndent(__filename, context => {
     ];
     
     solution = gauss(matrix, result);
-    assertIsEqualJson(solution, ["-1.99999999999999999994","2.99999999999999999995","0"]);
+    assertIsEqualJson(solution, [-2,3,0]);
 
     $A = [
         [1, 0, 0, 1, 0, 0],
@@ -48,5 +48,67 @@ logIndent(__filename, context => {
     ];
     $x = [0, 0, 0, -1, -1, -1];
     solution = gauss($A, $x);
-    assertIsEqualJson(() => solution, ["1","-1","-1","-1","1","1"])
+    assertIsEqualJson(() => solution, [1,-1,-1,-1,1,1])
+
+    $A = [
+        [1],
+    ];
+    $x = [1];
+    solution = gauss($A, $x);
+    assertIsEqualJson(() => solution, [1])
+
+    $A = [
+        [1, 1],
+    ];
+    $x = [1, 2];
+    solution = gauss($A, $x);
+    assertIsEqualJson(() => solution, [-1,2])
+
+    $A = [
+        [1, 1, 1],
+    ];
+    $x = [1, 2, 3];
+    solution = gauss($A, $x);
+    assertIsEqualJson(() => solution, [-4,2,3]);
+
+    $A = [
+        [1, 1, 2],
+        [1, 2, 2],
+    ];
+    $x = [1, 1, 1];
+    solution = gauss($A, $x);
+    assertIsEqualJson(() => solution, [-1,0,1]);
+
+    $A = [
+        [1, 0],
+        [0, 1],
+        [1, 0],
+        [0, 1],
+    ];
+    $x = [0, 0, 0, 0];
+    solution = gauss($A, $x);
+    assertIsEqualJson(() => solution, [0,0]);
+
+    $A = [
+        [1, 0],
+        [0, 1],
+        [1, 0],
+        [0, 1],
+    ];
+    $x = [1, 1, 1, 1];
+    solution = gauss($A, $x);
+    assertIsEqualJson(() => solution, [1,1]);
+
+    $A = [[1, 1], [2, 1]];
+    $x = [10, 16];
+    solution = gauss($A, $x);
+    assertIsEqualJson(() => solution, [6,4]);
+
+    $A = [
+        [1, 0, 1, 0],
+        [0, 1, 0, 1],
+    ];
+    $x = [1, 1, 1, 1];
+    solution = gauss($A, $x);
+    assertIsEqualJson(() => solution, [0,0,1,1]);
 })
