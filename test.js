@@ -8,6 +8,7 @@ require('./tests/e1n3SatToMatrix');
 require('./tests/identityPrefixOfSize');
 require('./tests/identityPrefix');
 require('./tests/e1n3SatConsistent');
+require('./tests/toE1n3Sat');
 
 let external = false;
 if (external) {

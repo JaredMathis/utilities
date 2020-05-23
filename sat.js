@@ -24,6 +24,7 @@ module.exports = {
     identityPrefix,
     identityPrefixOfSize,
     e1n3SatConsistent,
+    toE1n3Sat,
 };
 
 function isLiteral(v) {
@@ -77,6 +78,10 @@ function getMaxVariable(clauses) {
     return max;
 }
 
+/**
+ * Ensures clauses have at most 3 literals
+ * @param {*} clauses 
+ */
 function to3Sat(clauses) {
     let result;
     logIndent(to3Sat.name, context => {
@@ -88,8 +93,12 @@ function to3Sat(clauses) {
 
         let max = getMaxVariable(clauses);
 
-        let newClauses = {};
+        let newClauses = {"0":[]};
         loop(clauses, clause => {
+            if (clause.length <= 2) {
+                newClauses[0].push(clause);
+                return;
+            }
             loopPairs(clause, (a,b) => {
                 let key = [a,b];
                 key.sort();
@@ -132,6 +141,7 @@ function to3Sat(clauses) {
         merge(context, {newClauses});
         merge(context, {result});
         assertIs3Sat(result);
+        assert(() => result.length >= clauses.length);
     });
     return result;
 }
@@ -139,15 +149,15 @@ function to3Sat(clauses) {
 function toAll3Sat(clauses) {
     let result;
     logIndent(toAll3Sat.name, context => {
-        clauses = to3Sat(clauses);
+        c3Sat = to3Sat(clauses);
 
-        let max = getMaxVariable(clauses);
+        let max = getMaxVariable(c3Sat);
         let a = max + 1;
         let b = max + 2;
 
         result = [];
 
-        loop(clauses, c => {
+        loop(c3Sat, c => {
             if (c.length === 3) {
                 result.push(c);
                 return;
@@ -162,6 +172,8 @@ function toAll3Sat(clauses) {
             }
             assert(false);
         })
+
+        assert(() => result.length >= clauses.length);
     });
 
     return result;
@@ -187,24 +199,28 @@ function assertIsAll3Sat(clauses) {
     });
 }
 
-function toe1n3Sat(clauses) {
-    clauses = toAll3Sat(clauses);
+function toE1n3Sat(clauses) {
+    let result;
+    logIndent(toE1n3Sat.name, context => {
+        all3Sat = toAll3Sat(clauses);
 
-    let max = getMaxVariable(clauses);
-
-    let result = [];
-    loop(clauses, c => {
-        let x = c[0];
-        let y = c[1];
-        let z = c[2];
-        let a = ++max;
-        let b = ++max;
-        let c = ++max;
-        let d = ++max;
-        result.push([-x,a,b]);
-        result.push([b,y,c]);
-        result.push([c,d,-z]);
+        let max = getMaxVariable(all3Sat);
+    
+        result = [];
+        loop(all3Sat, clause => {
+            let x = clause[0];
+            let y = clause[1];
+            let z = clause[2];
+            let a = ++max;
+            let b = ++max;
+            let c = ++max;
+            let d = ++max;
+            result.push([-x,a,b]);
+            result.push([b,y,c]);
+            result.push([c,d,-z]);
+        });
     });
+    return result;
 }
 
 function e1n3SatValidSolution(clauses, solution) {

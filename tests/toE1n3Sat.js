@@ -1,5 +1,5 @@
 const { 
-    to3Sat,
+    toE1n3Sat,
 } = require('../sat');
 
 const {
@@ -8,11 +8,8 @@ const {
 } = require('../all');
 
 logIndent(__filename, context => {
-    let clauses;
-    let result;
-
-    clauses = [[1,2,3,4]];
-    result = to3Sat(clauses);
+    let clauses = [[1],[-1]];
+    let result = toE1n3Sat(clauses);
     assertIsEqualJson(result, () => 
     [
         [ 1, 8 ],
@@ -52,12 +49,4 @@ logIndent(__filename, context => {
         [ -3, 4, 10 ],
         [ -3, -4, 10 ]
     ]);
-
-    clauses = [[1]];
-    result = to3Sat(clauses);
-    assertIsEqualJson(result, () => [[1]]);
-
-    clauses = [[1],[-1]];
-    result = to3Sat(clauses);
-    assertIsEqualJson(result, () => [[1],[-1]]);
 })
