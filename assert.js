@@ -1,5 +1,5 @@
 const {
-    logIndent,
+    scope,
     merge,
     consoleLog,
     logProperties,
@@ -27,7 +27,7 @@ module.exports = {
 
 function assert(b, exitLambda) {
 
-    return logIndent(assert.name, context => {
+    return scope(assert.name, context => {
         let log = false;
 
         if (log) console.log('assert entered');
@@ -51,7 +51,7 @@ function assert(b, exitLambda) {
 }
 
 function assertError(exitLambda) {
-    return logIndent(assertError.name, context => {
+    return scope(assertError.name, context => {
         logProperties(context);
         if (isUndefined(exitLambda)) {
             exitLambda = processExit;
@@ -65,21 +65,21 @@ function fileExists(fileName) {
 }
 
 function assertFileExists(fileName) {
-    return logIndent(assertFileExists.name, context => {
+    return scope(assertFileExists.name, context => {
         merge(context, {fileName});
         assert(fileExists(fileName));
     });
 }
 
 function assertIsDefined(a) {
-    return logIndent(assertIsDefined.name, context => {
+    return scope(assertIsDefined.name, context => {
         merge(context, {a});
         return assert(isDefined(a));
     });
 }
 
 function assertIsEqual(left, right) {
-    return logIndent(assertIsEqual.name, context => {
+    return scope(assertIsEqual.name, context => {
         merge(context, {left});
         assertIsDefined(left);
 
@@ -110,7 +110,7 @@ function assertIsEqual(left, right) {
 }
 
 function assertIsEqualJson(left, right) {
-    return logIndent(assertIsEqualJson.name, context => {
+    return scope(assertIsEqualJson.name, context => {
         merge(context, {left});
         merge(context, {right});
 
@@ -141,7 +141,7 @@ function assertIsEqualJson(left, right) {
 }
 
 function assertAtLeast(left, right) {
-    return logIndent(assertAtLeast.name, context => {
+    return scope(assertAtLeast.name, context => {
         merge(context, {left});
         merge(context, {right});
 
@@ -157,7 +157,7 @@ function assertAtLeast(left, right) {
 }
 
 function assertAtMost(left, right) {
-    return logIndent(assertAtMost.name, context => {
+    return scope(assertAtMost.name, context => {
         merge(context, {left});
         merge(context, {right});
 

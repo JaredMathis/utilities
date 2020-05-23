@@ -1,5 +1,5 @@
 const {
-    logIndent,
+    scope,
     merge,
 } = require('./log');
 
@@ -22,7 +22,7 @@ module.exports = {
 }
 
 function readFile(fileName) {
-    return logIndent(readFile.name, context => {
+    return scope(readFile.name, context => {
         assertFileExists(fileName);
 
         merge(context, {fileName});
@@ -32,7 +32,7 @@ function readFile(fileName) {
 }
 
 function getFiles(directoryName) {
-    return logIndent(getFiles.name, context => {
+    return scope(getFiles.name, context => {
         assertFileExists(directoryName);
 
         merge(context, {directoryName});
@@ -42,7 +42,7 @@ function getFiles(directoryName) {
 }
 
 function appendFileLine(file, line) {
-    logIndent(appendFileLine.name, context => {
+    scope(appendFileLine.name, context => {
         assertFileExists(file);
         if (isDefined(line)) {
             assert(() => isString(line));

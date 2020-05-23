@@ -5,7 +5,7 @@ const {
 } = require('./core');
 
 module.exports = {
-    logIndent,
+    scope,
     consoleLog,
     merge,
     logProperties,
@@ -105,9 +105,9 @@ function logProperties(object, offset) {
     }    
 }
 
-function logIndent(name, lambda) {
+function scope(name, lambda) {
     let log = false;
-    if (log) console.log('logIndent entered');
+    if (log) console.log('scope entered');
     if (log) consoleLog(name + " entered");
 
     let result;
@@ -121,7 +121,7 @@ function logIndent(name, lambda) {
     try {
         result = lambda(context);
     } catch (e) {
-        console.log('logIndent error');
+        console.log('scope error');
         logProperties(context);
         console.log(e);
         processExit();
@@ -143,7 +143,7 @@ function consoleLog(message) {
         if (verbose)
         if (log) console.log('indent negative');
         console.log('consoleLog error');
-        console.log('need to call consoleLog inside logIndent');
+        console.log('need to call consoleLog inside scope');
         processExit();
     } else {
         if (verbose)

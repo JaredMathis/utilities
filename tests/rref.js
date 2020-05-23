@@ -1,12 +1,12 @@
 var rref = require('rref');
 
 const {
-    logIndent,
+    scope,
     assertIsEqualJson,
     assertIsEqual,
 } = require('../all');
 
-logIndent(__filename, context => {
+scope(__filename, context => {
     assertIsEqualJson(() => rref([
         [ 2, 1, -1, 8 ],
         [ -3, -1, 2, -11 ],

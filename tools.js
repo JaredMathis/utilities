@@ -7,7 +7,7 @@ const {
 } = require('./core');
 
 const {
-    logIndent,
+    scope,
     merge,
     consoleLog,
 } = require('./log');
@@ -37,7 +37,7 @@ module.exports = {
  */
 function loop(array, lambda) {
     let log = false;
-    logIndent(loop.name, context => {
+    scope(loop.name, context => {
         merge(context, {array});
         merge(context, {lambda});
 
@@ -59,7 +59,7 @@ function loop(array, lambda) {
 function toDictionary(array, property) {
     let result = {};
 
-    logIndent(toDictionary.name, context => {
+    scope(toDictionary.name, context => {
     
         loop(array, a => {
             let key = a[property];
@@ -89,7 +89,7 @@ function arrayLast(array) {
 function arrayMax(array) {
     let max;
 
-    logIndent(arrayAll.name, context => {
+    scope(arrayAll.name, context => {
         assert(() => isArray(array));
         
         max = array[0]
@@ -106,7 +106,7 @@ function arrayMax(array) {
 function arrayMin(array) {
     let min;
 
-    logIndent(arrayAll.name, context => {
+    scope(arrayAll.name, context => {
         assert(() => isArray(array));
         
         min = array[0]
@@ -131,7 +131,7 @@ function arrayMin(array) {
 function arrayAll(array, predicate) {
     let success = true;
 
-    logIndent(arrayAll.name, context => {
+    scope(arrayAll.name, context => {
         assert(() => isArray(array));
 
         loop(array, a => {
@@ -155,7 +155,7 @@ function arrayAll(array, predicate) {
 function arraySome(array, predicate) {
     let success = false;
 
-    logIndent(arraySome.name, context => {
+    scope(arraySome.name, context => {
         assert(() => isArray(array));
 
         loop(array, a => {
@@ -170,7 +170,7 @@ function arraySome(array, predicate) {
 }
 
 function loopPairs(array, lambda) {
-    logIndent(loopPairs.name, context => {
+    scope(loopPairs.name, context => {
         loop(array, (a, i) => {
             let result;
             loop(array, (b, j) => {
@@ -193,7 +193,7 @@ function loopPairs(array, lambda) {
 function isDistinct(array) {
     let success = true;
 
-    logIndent(isDistinct.name, context => {
+    scope(isDistinct.name, context => {
         assert(() => isArray(array));
 
         loopPairs(array, (a, b) => {
@@ -210,7 +210,7 @@ function isDistinct(array) {
 function arrayCount(array, predicate) {
     let count = 0;
 
-    logIndent(arrayCount.name, context => {
+    scope(arrayCount.name, context => {
         assert(() => isArray(array));
 
         loop(array, a => {
@@ -225,7 +225,7 @@ function arrayCount(array, predicate) {
 
 function stringSuffix(string, count) {
     let result;
-    logIndent(stringSuffix.name, context => {
+    scope(stringSuffix.name, context => {
         assert(() => isString(string));
 
         assert(() => isInteger(count));

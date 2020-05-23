@@ -3,11 +3,11 @@ const {
 } = require('../sat');
 
 const {
-    logIndent,
+    scope,
     assertIsEqualJson,
 } = require('../all');
 
-logIndent(__filename, context => {
+scope(__filename, context => {
     let clauses;
     let result;
 

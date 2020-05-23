@@ -14,10 +14,10 @@ const {
     arrayMax,
     arrayCount,
     merge,
-    logIndent,
+    scope,
 } = require('../all');
 
-logIndent(__filename, context => {
+scope(__filename, context => {
     let clauses;
     
     // No solution

@@ -8,7 +8,7 @@ const {
     range,
     arrayMax,
     arrayCount,
-    logIndent,
+    scope,
     merge,
     arrayMin,
     isUndefined,
@@ -39,7 +39,7 @@ function assertIsValidClause(clause) {
 }
 
 function assertIsValidClauses(clauses) {
-    logIndent(assertIsValidClauses.name, context => {
+    scope(assertIsValidClauses.name, context => {
         merge(context, {clauses});
         assert(() => isArray(clauses));
         
@@ -70,7 +70,7 @@ function getVariables(clauses) {
 function getMaxVariable(clauses) {
     let max;
     
-    logIndent(getMaxVariable.name, context => {
+    scope(getMaxVariable.name, context => {
         assertIsValidClauses(clauses);
 
         let v = getVariables(clauses);
@@ -85,7 +85,7 @@ function getMaxVariable(clauses) {
  */
 function to3Sat(clauses) {
     let result;
-    logIndent(to3Sat.name, context => {
+    scope(to3Sat.name, context => {
         let log = false;
 
         merge(context, {clauses});
@@ -149,7 +149,7 @@ function to3Sat(clauses) {
 
 function toAll3Sat(clauses) {
     let result;
-    logIndent(toAll3Sat.name, context => {
+    scope(toAll3Sat.name, context => {
         c3Sat = to3Sat(clauses);
 
         let max = getMaxVariable(c3Sat);
@@ -181,7 +181,7 @@ function toAll3Sat(clauses) {
 }
 
 function assertIs3Sat(clauses) {
-    logIndent(assertIs3Sat.name, context => {
+    scope(assertIs3Sat.name, context => {
         assertIsValidClauses(clauses);
 
         loop(clauses, c => {
@@ -191,7 +191,7 @@ function assertIs3Sat(clauses) {
 }
 
 function assertIsAll3Sat(clauses) {
-    logIndent(assertIs3Sat.name, context => {
+    scope(assertIs3Sat.name, context => {
         assertIsValidClauses(clauses);
 
         loop(clauses, c => {
@@ -202,7 +202,7 @@ function assertIsAll3Sat(clauses) {
 
 function toE1n3Sat(clauses) {
     let result;
-    logIndent(toE1n3Sat.name, context => {
+    scope(toE1n3Sat.name, context => {
         all3Sat = toAll3Sat(clauses);
 
         let max = getMaxVariable(all3Sat);
@@ -226,7 +226,7 @@ function toE1n3Sat(clauses) {
 
 function e1n3SatValidSolution(clauses, solution) {
     let result = true;
-    logIndent(e1n3SatValidSolution.name, context => {
+    scope(e1n3SatValidSolution.name, context => {
         let log = false;
         if (log) console.log({solution});
         if (log) console.log({clauses});
@@ -251,7 +251,7 @@ function e1n3SatValidSolution(clauses, solution) {
 function e1n3SatToMatrix(clauses) {
     let matrix = [];
 
-    logIndent(e1n3SatToMatrix.name, context => {
+    scope(e1n3SatToMatrix.name, context => {
         assertIsAll3Sat(clauses);
 
         let variables = getVariables(clauses);
@@ -279,7 +279,7 @@ function e1n3SatConsistent(clauses) {
     let log = false;
     let result = true;
 
-    logIndent(e1n3SatConsistent.name, context => {
+    scope(e1n3SatConsistent.name, context => {
         let matrix = e1n3SatToMatrix(clauses);
         let reduced = rref(matrix);
         if (log) console.log(reduced);
@@ -300,7 +300,7 @@ function e1n3SatConsistent(clauses) {
 function identityPrefixOfSize(matrix, size) {
     let valid = true;
 
-    logIndent(identityPrefixOfSize.name, context => {
+    scope(identityPrefixOfSize.name, context => {
         merge(context, {size});
         assert(() => isInteger(size));
 
@@ -333,7 +333,7 @@ function identityPrefixOfSize(matrix, size) {
 
 function identityPrefix(matrix) {
     let result;
-    logIndent(identityPrefix.name, context => {
+    scope(identityPrefix.name, context => {
         let lesser = arrayMin([matrix.length, matrix[0].length]);
         loop(range(lesser + 1), size=> {
             if (identityPrefixOfSize(matrix, size)) {

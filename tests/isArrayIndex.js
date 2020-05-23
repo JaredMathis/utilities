@@ -1,10 +1,10 @@
 const {
-    logIndent,
+    scope,
     isArrayIndex,
     assertIsEqual
 } = require('../all');
 
-logIndent(__filename, context => {
+scope(__filename, context => {
     assertIsEqual(() => isArrayIndex([], 0), false);
     assertIsEqual(() => isArrayIndex([1], 0), true);
     assertIsEqual(() => isArrayIndex([1], 1), false);

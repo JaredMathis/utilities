@@ -2,7 +2,7 @@ const GaussianElimination = require('na-gaussian-elimination');
 const BigNumber = require('bignumber.js');
 
 const {
-    logIndent,
+    scope,
     assertIsEqualJson,
     assertIsEqual,
 } = require('../all');
@@ -25,7 +25,7 @@ function gauss(matrix, result) {
     return s;
 }
 
-logIndent(__filename, context => {
+scope(__filename, context => {
     var matrix = [
         [(1), (2), (3)],
         [(4), (5), (6)],

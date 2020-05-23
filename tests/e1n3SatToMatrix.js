@@ -14,11 +14,11 @@ const {
     range,
     arrayMax,
     arrayCount,
-    logIndent,
+    scope,
     assertIsEqualJson,
 } = require('../all');
 
-logIndent(__filename, context => {
+scope(__filename, context => {
     let solution = [1,-2,-3];
     let clauses = [
         [1,2,3],
