@@ -160,7 +160,7 @@ function toExact1_3Sat(clauses) {
 function exact1_3Satisfied(clauses, solution) {
     let result = true;
     logIndent(exact1_3Satisfied.name, context => {
-        let log = true;
+        let log = false;
         if (log) console.log({solution});
         if (log) console.log({clauses});
 
