@@ -20,6 +20,9 @@ module.exports = {
     loop,
     toDictionary,
     isArrayIndex,
+    arrayLast,
+    arrayAll,
+    arraySome,
 };
 
 /**
@@ -36,9 +39,9 @@ function loop(array, lambda) {
     
         for (let index = 0; index < array.length; index++) {
             merge(context, {index});
-            let iteration = array[index];
-            merge(context, {iteration});
-            let breakLoop = lambda(iteration, index);
+            let element = array[index];
+            merge(context, {element});
+            let breakLoop = lambda(element, index);
             if (breakLoop) {
                 break;
             }
@@ -70,4 +73,57 @@ function isArrayIndex(array, index) {
     assert(() => isArray(array) || isString(array));
     assert(() => isInteger(index));
     return 0 <= index && index < array.length;
+}
+
+function arrayLast(array) {
+    assert(() => isArray(array) || isString(array));
+    return array[array.length - 1];
+}
+
+/**
+ * Returns true if array is empty
+ * or if predicate is true for each element
+ * of the array
+ * @param {*} array 
+ * @param {*} predicate 
+ */
+function arrayAll(array, predicate) {
+    let success = true;
+
+    logIndent(arrayAll.name, context => {
+        assert(() => isArray(array));
+
+        loop(array, a => {
+            if (!predicate(a)) {
+                success = false;
+                return true;
+            }
+        })
+    });
+
+    return success;
+}
+
+/**
+ * Returns false if array is empty
+ * or if predicate is true for some element
+ * of the array
+ * @param {*} array 
+ * @param {*} predicate 
+ */
+function arraySome(array, predicate) {
+    let success = false;
+
+    logIndent(arraySome.name, context => {
+        assert(() => isArray(array));
+
+        loop(array, a => {
+            if (predicate(a)) {
+                success = true;
+                return true;
+            }
+        })
+    });
+
+    return success;
 }

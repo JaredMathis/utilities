@@ -117,7 +117,22 @@ function assertIsEqualJson(left, right) {
         assertIsDefined(left);
         assertIsDefined(right);
 
-        let equals = JSON.stringify(left) === JSON.stringify(right);
+        let leftValue;
+        if (isFunction(left)) {
+            leftValue = left();
+        } else {
+            leftValue = left;
+        }
+        merge(context, {leftValue});
+        let rightValue;
+        if (isFunction(right)) {
+            rightValue = right();
+        } else {
+            rightValue = right;
+        }
+        merge(context, {rightValue});
+
+        let equals = JSON.stringify(leftValue) === JSON.stringify(rightValue);
         if (equals) {
             return;
         }

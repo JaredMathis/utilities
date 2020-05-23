@@ -4,6 +4,12 @@ const {
 } = require('./log');
 
 const {
+    isDefined,
+    isString,
+} = require('./core');
+
+const {
+    assert,
     assertFileExists,
 } = require('./assert');
 
@@ -12,6 +18,7 @@ const fs = require('fs');
 module.exports = {
     readFile,
     getFiles,
+    appendFileLine,
 }
 
 function readFile(fileName) {
@@ -31,5 +38,19 @@ function getFiles(directoryName) {
         merge(context, {directoryName});
         let result = fs.readdirSync(directoryName);
         return result;
+    });
+}
+
+function appendFileLine(file, line) {
+    logIndent(appendFileLine.name, context => {
+        assertFileExists(file);
+        if (isDefined(line)) {
+            assert(() => isString(line));
+            if (line.length > 0) {
+                fs.appendFileSync(file, line);
+            }
+        }
+        fs.appendFileSync(file, `
+`);
     });
 }
