@@ -25,6 +25,7 @@ module.exports = {
     identityPrefixOfSize,
     e1n3SatConsistent,
     toE1n3Sat,
+    toAll3Sat,
 };
 
 function isLiteral(v) {
@@ -275,16 +276,18 @@ function e1n3SatToMatrix(clauses) {
 }
 
 function e1n3SatConsistent(clauses) {
+    let log = false;
     let result = true;
 
     logIndent(e1n3SatConsistent.name, context => {
         let matrix = e1n3SatToMatrix(clauses);
         let reduced = rref(matrix);
-        let p = identityPrefix(reduced);
+        if (log) console.log(reduced);
+        //let p = identityPrefix(reduced);
 
         loop(reduced, row =>{
-            let remaining = row.slice(p);
-            if (arrayAll(remaining, r => r === 0)) {
+            let inconsistent = arrayCount(row, r => r !== 0) == 1;
+            if (inconsistent) {
                 result = false;
                 return true;
             }

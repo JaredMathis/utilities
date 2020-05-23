@@ -20,6 +20,16 @@ const {
 logIndent(__filename, context => {
     let clauses;
     
+    // No solution
+    clauses = [
+        [1],
+        [-1],
+    ];
+    clauses = toE1n3Sat(clauses);
+    merge(context, {clauses});
+    let done = false;
+    if (done) assert(() => !e1n3SatConsistent(clauses));
+
     clauses = [[1,2,3]];
     merge(context, {clauses});
     assert(() => e1n3SatConsistent(clauses));
@@ -44,13 +54,4 @@ logIndent(__filename, context => {
     ];
     merge(context, {clauses});
     assert(() => e1n3SatConsistent(toE1n3Sat(clauses)));
-
-    // No solution
-    clauses = [
-        [1],
-        [-1],
-    ];
-    clauses = toE1n3Sat(clauses);
-    merge(context, {clauses});
-    assert(() => !e1n3SatConsistent(clauses));
 });
