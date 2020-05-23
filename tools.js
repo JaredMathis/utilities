@@ -29,6 +29,7 @@ module.exports = {
     arrayMin,
     arrayCount,
     arrayMin,
+    stringSuffix,
 };
 
 /**
@@ -209,7 +210,7 @@ function isDistinct(array) {
 function arrayCount(array, predicate) {
     let count = 0;
 
-    logIndent(arraySome.name, context => {
+    logIndent(arrayCount.name, context => {
         assert(() => isArray(array));
 
         loop(array, a => {
@@ -220,4 +221,18 @@ function arrayCount(array, predicate) {
     });
 
     return count;
+}
+
+function stringSuffix(string, count) {
+    let result;
+    logIndent(stringSuffix.name, context => {
+        assert(() => isString(string));
+
+        assert(() => isInteger(count));
+        assert(() => 0 <= count);
+        assert(() => count <= string.length);
+
+        result = string.substring(string.length - count);
+    });
+    return result;
 }
