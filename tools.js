@@ -23,6 +23,10 @@ module.exports = {
     arrayLast,
     arrayAll,
     arraySome,
+    isDistinct,
+    loopPairs,
+    arrayMax,
+    arrayCount,
 };
 
 /**
@@ -79,6 +83,23 @@ function arrayLast(array) {
     assert(() => isArray(array) || isString(array));
     return array[array.length - 1];
 }
+function arrayMax(array) {
+    let max;
+
+    logIndent(arrayAll.name, context => {
+        assert(() => isArray(array));
+        
+        max = array[0]
+
+        loop(array, a => {
+            if (a > max) {
+                max = a;
+            }
+        })
+    });
+
+    return max;
+}
 
 /**
  * Returns true if array is empty
@@ -126,4 +147,58 @@ function arraySome(array, predicate) {
     });
 
     return success;
+}
+
+function loopPairs(array, lambda) {
+    logIndent(loopPairs.name, context => {
+        loop(array, (a, i) => {
+            let result;
+            loop(array, (b, j) => {
+                if (j <= i) {
+                    return;
+                }
+    
+                result = lambda(a, b);
+                if (result) {
+                    return true;
+                }
+            });
+            if (result) {
+                return true;
+            }
+        });
+    });
+}
+
+function isDistinct(array) {
+    let success = true;
+
+    logIndent(isDistinct.name, context => {
+        assert(() => isArray(array));
+
+        loopPairs(array, (a, b) => {
+            if (a === b) {
+                success = false;
+            }
+        });
+    });
+
+    return success;
+}
+
+
+function arrayCount(array, predicate) {
+    let count = 0;
+
+    logIndent(arraySome.name, context => {
+        assert(() => isArray(array));
+
+        loop(array, a => {
+            if (predicate(a)) {
+                count++;
+            }
+        })
+    });
+
+    return count;
 }
