@@ -13,6 +13,7 @@ require('./tests/toE1n3Sat');
 require('./tests/stringSuffix');
 require('./tests/deleteDirectory/test.js');
 require('./tests/copyFiles/test.js');
+require('./tests/getPackageVersion/test.js');
 
 let external = false;
 if (external) {

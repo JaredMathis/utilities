@@ -2,6 +2,7 @@ const {
     isArray,
     isFunction,
     isDefined,
+    isUndefined,
     isString,
     isInteger,
 } = require('./core');
@@ -30,6 +31,7 @@ module.exports = {
     arrayCount,
     arrayMin,
     stringSuffix,
+    getPackageVersion,
 };
 
 /**
@@ -235,4 +237,19 @@ function stringSuffix(string, count) {
         result = string.substring(string.length - count);
     });
     return result;
+}
+
+function getPackageVersion(packagePath) {
+    let version;
+    scope(getPackageVersion.name, x => {
+        if (isUndefined(packagePath)) {
+            packagePath = './package.json';
+        }
+        let package = require(packagePath);
+
+        version = package.version;
+        merge(x, {version});
+        assert(() => isDefined(version));
+    })
+    return version;
 }
