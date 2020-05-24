@@ -1,6 +1,7 @@
 const {
     isDefined,
     isString,
+    isUndefined,
 } = require('./core');
 
 const {
@@ -11,6 +12,7 @@ const {
 const {
     assert,
     assertFileExists,
+    assertIsEqual,
 } = require('./assert');
 
 const {
@@ -26,6 +28,8 @@ module.exports = {
     appendFileLine,
     copyFiles,
     deleteDirectory,
+    getPackageVersion,
+    bumpPackageVersion,
 }
 
 function readFile(fileName) {
@@ -90,4 +94,47 @@ function deleteDirectory(directory) {
 
         fs.rmdirSync(directory);
     });
+}
+
+
+function getPackageVersion(packagePath) {
+    let version;
+    scope(getPackageVersion.name, x => {
+        if (isUndefined(packagePath)) {
+            packagePath = './package.json';
+        }
+        let package = require(packagePath);
+
+        version = package.version;
+        merge(x, {version});
+        assert(() => isDefined(version));
+    })
+    return version;
+}
+
+function bumpPackageVersion(packagePath) {
+    scope(bumpPackageVersion.name, x => {
+        if (isUndefined(packagePath)) {
+            packagePath = './package.json';
+        }
+
+        let version = getPackageVersion(packagePath);
+        merge(x, {version});
+
+        let parts = version.split('.');
+        assertIsEqual(() => parts.length, 3);
+
+        let build = parseInt(parts[2]);
+        let nextBuild = build + 1;
+
+        parts[2] = nextBuild;
+
+        let nextVersion = parts.join('.');
+
+        let package = require(packagePath);
+        package.version = nextVersion;
+
+        let json = JSON.stringify(package, null, 2);
+        fs.writeFileSync(packagePath, json);
+    })
 }

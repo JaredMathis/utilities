@@ -1,0 +1,27 @@
+{
+  "name": "wlj-utilities",
+  "version": "1.0.0",
+  "description": "",
+  "main": "all.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "bignumber.js": "^9.0.0",
+    "na-gaussian-elimination": "^1.0.0",
+    "rref": "0.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaredMathis/utilities.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/JaredMathis/utilities/issues"
+  },
+  "homepage": "https://github.com/JaredMathis/utilities#readme"
+}
