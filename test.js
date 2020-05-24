@@ -11,7 +11,8 @@ require('./tests/toAll3Sat');
 require('./tests/e1n3SatConsistent');
 require('./tests/toE1n3Sat');
 require('./tests/stringSuffix');
-
+require('./tests/deleteDirectory/test.js');
+require('./tests/copyFiles/test.js');
 
 let external = false;
 if (external) {

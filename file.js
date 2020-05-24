@@ -1,24 +1,31 @@
 const {
-    scope,
-    merge,
-} = require('./log');
-
-const {
     isDefined,
     isString,
 } = require('./core');
+
+const {
+    scope,
+    merge,
+} = require('./log');
 
 const {
     assert,
     assertFileExists,
 } = require('./assert');
 
+const {
+    loop,
+} = require('./tools');
+
 const fs = require('fs');
+const path = require('path');
 
 module.exports = {
     readFile,
     getFiles,
     appendFileLine,
+    copyFiles,
+    deleteDirectory,
 }
 
 function readFile(fileName) {
@@ -52,5 +59,35 @@ function appendFileLine(file, line) {
         }
         fs.appendFileSync(file, `
 `);
+    });
+}
+
+function copyFiles(fromDirectory, toDirectory) {
+    scope(copyFiles.name, context => {
+        const fileNames = fs.readdirSync(fromDirectory);
+    
+        // Create the directory if it doesn't exist.
+        if (!fs.existsSync(toDirectory)) {
+            fs.mkdirSync(toDirectory);
+        }
+
+        loop(fileNames, fileName => {
+            let src = path.join(fromDirectory, fileName);
+            let dest = path.join(toDirectory, fileName);
+            fs.copyFileSync(src, dest);
+        });
+    })
+}
+
+function deleteDirectory(directory) {
+    scope(deleteDirectory.name, context => {
+        const fileNames = fs.readdirSync(directory);
+
+        loop(fileNames, fileName => {
+            let p = path.join(directory, fileName);
+            fs.unlinkSync(p);
+        });
+
+        fs.rmdirSync(directory);
     });
 }
