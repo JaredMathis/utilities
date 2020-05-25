@@ -25,3 +25,4 @@ if (external) {
     process.chdir('../grammars2');
     require('../grammars2/test');
 }
+require("./tests/throws/throws.js");
