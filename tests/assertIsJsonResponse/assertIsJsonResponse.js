@@ -4,10 +4,10 @@ const assertIsJsonResponse = require("../../library/assertIsJsonResponse.js");
 u.scope(__filename, x => {
     let response;
     
-    response = {status: 200, data:{success:true}};
+    response = {statusCode: 200, body:{toString:()=>"{\"success\":true}"}};
 
     assertIsJsonResponse(response, 200, {success:true})
-    
+
     let valid = u.throws(() => assertIsJsonResponse(response, 200, {success:true}));
     u.merge(x, {valid});
     u.assert(() => !valid);
