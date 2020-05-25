@@ -4,14 +4,11 @@ const {
 } = require('./core');
 
 const scope = require('./library/scope');
+const assert = require('./library/assert');
 
 const { 
     loop,
 } = require('./tools');
-
-const { 
-    assert,
-} = require('./assert');
 
 const fs = require('fs');
 const path = require('path');
@@ -77,7 +74,7 @@ function fn(args) {
         let fnFile = path.join(libDirectory, fnName + '.js');
         assert(() => !fs.existsSync(fnFile));
         fs.writeFileSync(fnFile, `
-${module.exports.isWljUtilitiesPackage ? 'const scope = require("../all").scope;' : 'const u = require("wlj-utilities");' }
+${module.exports.isWljUtilitiesPackage ? 'const scope = require("./scope");' : 'const u = require("wlj-utilities");' }
 
 module.exports = ${fnName};
 

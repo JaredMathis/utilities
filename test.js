@@ -31,3 +31,4 @@ require("./tests/assertIsEqualJson/assertIsEqualJson.js");
 require("./tests/assertIsJsonResponse/assertIsJsonResponse.js");
 require("./tests/propertiesToString/propertiesToString.js");
 require("./tests/scope/scope");
+require("./tests/toQueryString/toQueryString.js");
