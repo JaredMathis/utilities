@@ -25,4 +25,8 @@ if (external) {
     process.chdir('../grammars2');
     require('../grammars2/test');
 }
+require("./tests/assert/assert.js");
 require("./tests/throws/throws.js");
+require("./tests/assertIsEqualJson/assertIsEqualJson.js");
+require("./tests/assertIsJsonResponse/assertIsJsonResponse.js");
+require("./tests/scope/scope");

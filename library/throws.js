@@ -2,9 +2,7 @@ const {
     isFunction,
 } = require("./../core");
 
-const {
-    scope,
-} = require("./../log");
+const scope = require("./../library/scope");
 
 const {
     assert,

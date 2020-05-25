@@ -3,9 +3,7 @@ const {
     isString,
 } = require('./core');
 
-const { 
-    scope,
-} = require('./log');
+const scope = require('./library/scope');
 
 const { 
     loop,
@@ -25,6 +23,8 @@ module.exports = {
     commandLine,
     fn,
     baseDirectory: '.',
+    /** Whether or not this is the wlj-utilities NPM package */
+    isWljUtilitiesPackage: false
 };
 
 function commandLine() {
@@ -77,13 +77,13 @@ function fn(args) {
         let fnFile = path.join(libDirectory, fnName + '.js');
         assert(() => !fs.existsSync(fnFile));
         fs.writeFileSync(fnFile, `
-const u = require("wlj-utilities");
+${module.exports.isWljUtilitiesPackage ? 'const scope = require("../all").scope;' : 'const u = require("wlj-utilities");' }
 
 module.exports = ${fnName};
 
 function ${fnName}() {
     let result;
-    u.scope(${fnName}.name, x => {
+    ${module.exports.isWljUtilitiesPackage ? '' : 'u.'}scope(${fnName}.name, x => {
 
     });
     return result;
@@ -107,7 +107,8 @@ function ${fnName}() {
         let testFile = path.join(fnTestDirectory, fnName + '.js');
         assert(() => !fs.existsSync(testFile));
         fs.writeFileSync(testFile, `
-const u = require("wlj-utilities");
+const u = require("${module.exports.isWljUtilitiesPackage ? '../../all' : 'wlj-utilities' }");
+
 const ${fnName} = require("../../${library}/${fnName}.js");
 
 u.scope(__filename, x => {
@@ -135,7 +136,7 @@ u.scope(__filename, x => {
             result.push('Modified ' + indexFile);
         }
         fs.appendFileSync(indexFile, EOL);
-        fs.appendFileSync(indexFile, `module.exports.${fnName} = require("./../library/${fnName}.js");`);
+        fs.appendFileSync(indexFile, `module.exports.${fnName} = require("./library/${fnName}.js");`);
         result.push('Finished');
     });
 

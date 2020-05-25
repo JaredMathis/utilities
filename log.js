@@ -5,7 +5,7 @@ const {
 } = require('./core');
 
 module.exports = {
-    scope,
+    //scope,
     consoleLog,
     merge,
     logProperties,

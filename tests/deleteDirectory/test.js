@@ -6,6 +6,9 @@ u.scope(__filename, context => {
     const directory = path.join(__dirname, 'a');
 
     u.merge(context, {directory});
+    if (fs.existsSync(directory)) {
+        u.deleteDirectory(directory);
+    }
     u.assert(() => !fs.existsSync(directory));
 
     u.merge(context, {step:'creating directory'});

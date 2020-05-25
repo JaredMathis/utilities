@@ -7,8 +7,9 @@ const {
     isInteger,
 } = require('./core');
 
+const scope = require('./library/scope');
+
 const {
-    scope,
     merge,
     consoleLog,
 } = require('./log');

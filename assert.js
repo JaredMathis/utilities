@@ -1,5 +1,6 @@
+const scope = require('./library/scope');
+
 const {
-    scope,
     merge,
     consoleLog,
     logProperties,

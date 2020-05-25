@@ -23,6 +23,11 @@ function isString(s) {
 }
 
 function processExit() {
+    let log = false;
+    if (log) {
+        let stack = new Error().stack;
+        console.log(stack);
+    }
     console.log('Calling process.exit(1)');
     process.exit(1);
 }
