@@ -1,7 +1,7 @@
 const isString = require("../core").isString;
 const isFunction = require("../core").isFunction;
 const processExit = require("../core").processExit;
-const logProperties = require("../log").logProperties;
+const propertiesToString = require("./propertiesToString");
 
 module.exports = scope;
 
@@ -26,15 +26,21 @@ function scope(name, lambda) {
         count--;
 
         if (count === 0) {
-            let offset = 1;
+            let indent = '  ';
             console.log(name + ' entered');
-            logProperties(x, offset);
+            let properties = propertiesToString(x, indent);
+            for (let p of properties) {
+                console.log(p);
+            }
 
             let current = e;
             while ((current instanceof ScopeError)) {
-                offset++
-                console.log(current.name + ' entered');
-                logProperties(current.context, offset);
+                console.log(indent + current.name + ' entered');
+                indent += '  '
+                let properties = propertiesToString(current.context, indent);
+                for (let p of properties) {
+                    console.log(p);
+                }
                 current = current.innerError;
             }
 

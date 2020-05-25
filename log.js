@@ -9,6 +9,7 @@ module.exports = {
     consoleLog,
     merge,
     logProperties,
+    truncateStringTo,
 }
 
 // TODO: Validate arguments of framework
