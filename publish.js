@@ -7,6 +7,6 @@ require('./test');
 
 const u = require('./all');
 
-u.bumpPackageVersion();
+u.bumpPackageVersion(__dirname);
 
 execSync('npm publish');

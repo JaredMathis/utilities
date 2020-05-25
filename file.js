@@ -96,13 +96,14 @@ function deleteDirectory(directory) {
     });
 }
 
+const packageJson = 'package.json';
 
-function getPackageVersion(packagePath) {
+function getPackageVersion(packageDirectory) {
     let version;
     scope(getPackageVersion.name, x => {
-        if (isUndefined(packagePath)) {
-            packagePath = './package.json';
-        }
+        assert(() => isString(packageDirectory));
+        let packagePath = path.join(packageDirectory, packageJson);
+
         let package = require(packagePath);
 
         version = package.version;
@@ -112,13 +113,11 @@ function getPackageVersion(packagePath) {
     return version;
 }
 
-function bumpPackageVersion(packagePath) {
+function bumpPackageVersion(packageDirectory) {
+    let log = true;
     scope(bumpPackageVersion.name, x => {
-        if (isUndefined(packagePath)) {
-            packagePath = './package.json';
-        }
-
-        let version = getPackageVersion(packagePath);
+        assert(() => isString(packageDirectory));
+        let version = getPackageVersion(packageDirectory);
         merge(x, {version});
 
         let parts = version.split('.');
@@ -131,10 +130,13 @@ function bumpPackageVersion(packagePath) {
 
         let nextVersion = parts.join('.');
 
+        let packagePath = path.join(packageDirectory, packageJson);
+
         let package = require(packagePath);
         package.version = nextVersion;
 
         let json = JSON.stringify(package, null, 2);
         fs.writeFileSync(packagePath, json);
+        if (log) console.log(`Updated version to ${nextVersion} in ` + packagePath);
     })
 }
