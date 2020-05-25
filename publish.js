@@ -10,3 +10,5 @@ const u = require('./all');
 u.bumpPackageVersion(__dirname);
 
 execSync('npm publish');
+
+console.log('published');
