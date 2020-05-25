@@ -15,6 +15,7 @@ require('./tests/deleteDirectory/test.js');
 require('./tests/copyFiles/test.js');
 require('./tests/getPackageVersion/test.js');
 require('./tests/bumpPackageVersion/test.js');
+require('./tests/fn/fn.js');
 
 let external = false;
 if (external) {
