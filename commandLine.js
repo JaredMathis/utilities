@@ -120,9 +120,22 @@ u.scope(__filename, x => {
         let allTestsFile = path.join(module.exports.baseDirectory, 'test.js');
         if (!fs.existsSync(allTestsFile)) {
             fs.writeFileSync(allTestsFile, '');
+            result.push('Created ' + allTestsFile);
+        } else {
+            result.push('Modified ' + allTestsFile);
         }
         fs.appendFileSync(allTestsFile, EOL);
         fs.appendFileSync(allTestsFile, `require("./${testFile}");`)
+
+        let indexFile = path.join(module.exports.baseDirectory, 'index.js');
+        if (!fs.existsSync(indexFile)) {
+            fs.writeFileSync(indexFile, 'module.exports = {};');
+            result.push('Created ' + indexFile);
+        } else {
+            result.push('Modified ' + indexFile);
+        }
+        fs.appendFileSync(indexFile, EOL);
+        fs.appendFileSync(indexFile, `module.exports.${fnName} = require("./../library/${fnName}.js");`);
         result.push('Finished');
     });
 

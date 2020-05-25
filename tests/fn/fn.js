@@ -3,12 +3,15 @@ const fs = require('fs');
 const u = require('../../all');
 const commands = require('../../commandLine');
 
+const log = true;
+
 u.scope(__filename, x => {
     let libDirectory = path.join(__dirname, 'library');
     let aFile = path.join(libDirectory, 'a.js');
     let testsDirectory = path.join(__dirname, 'tests');
     let aDirectory = path.join(__dirname, 'tests/a');
     let testFile = path.join(__dirname, 'test.js');
+    let indexFile = path.join(__dirname, 'index.js');
 
     try {
         cleanup();
@@ -22,7 +25,13 @@ u.scope(__filename, x => {
         'Created /Users/jared/Documents/GitHub/utilities/tests/fn/tests\n' +
         'Created /Users/jared/Documents/GitHub/utilities/tests/fn/tests/a\n' +
         'Created /Users/jared/Documents/GitHub/utilities/tests/fn/tests/a/a.js\n' +
+        'Created /Users/jared/Documents/GitHub/utilities/tests/fn/test.js\n' +
+        'Created /Users/jared/Documents/GitHub/utilities/tests/fn/index.js\n' +
         'Finished';
+
+        if (result !== expected)
+        if (log) console.log({result});
+
         u.assertIsEqualJson(() => result, () => expected);
 
         u.loop([
@@ -31,6 +40,7 @@ u.scope(__filename, x => {
             testsDirectory,
             testFile,
             aFile,
+            indexFile,
         ], f=>{
             u.merge(x,{f});
             u.assert(() => fs.existsSync(f));
@@ -40,18 +50,16 @@ u.scope(__filename, x => {
     }
 
     function cleanup() {
-        if (fs.existsSync(aFile)) {
-            fs.unlinkSync(aFile);
-        }
+        u.loop([indexFile,aFile,testFile], f => {
+            if (fs.existsSync(f)) {
+                fs.unlinkSync(f);
+            }
+        });
 
         u.loop([libDirectory, aDirectory, testsDirectory], d => {
             if (fs.existsSync(d)) {
                 u.deleteDirectory(d);
             }
         });
-
-        if (fs.existsSync(testFile)) {
-            fs.unlinkSync(testFile);
-        }
     }
 });
