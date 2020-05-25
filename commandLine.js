@@ -1,4 +1,20 @@
-const u = require('./all');
+const { 
+    isArray,
+    isString,
+} = require('./core');
+
+const { 
+    scope,
+} = require('./log');
+
+const { 
+    loop,
+} = require('./tools');
+
+const { 
+    assert,
+} = require('./assert');
+
 const fs = require('fs');
 const path = require('path');
 const { EOL } = require('os');
@@ -12,7 +28,7 @@ module.exports = {
 };
 
 function commandLine() {
-    u.scope(commandLine.name, x=> {
+    scope(commandLine.name, x=> {
         let commands = {
             fn,
         };
@@ -21,7 +37,7 @@ function commandLine() {
         if (!command) {
             console.log('Please use a command-line argument.');
             console.log('Valid command-line arguments:');
-            u.loop(Object.keys(commands), c => {
+            loop(Object.keys(commands), c => {
                 console.log(c);
             });
             return;
@@ -40,8 +56,8 @@ function commandLine() {
 
 function fn(args) {
     let result = [];
-    u.scope(fn.name, x => {
-        u.assert(() => u.isArray(args));
+    scope(fn.name, x => {
+        assert(() => isArray(args));
 
         if (args.length !== 1) {
             result.push('Expecting 1 argument');
@@ -49,16 +65,17 @@ function fn(args) {
         }
 
         let fnName = args[0];
-        u.assert(() => u.isString(fnName));
+        assert(() => isString(fnName));
 
-        let libDirectory = path.join(module.exports.baseDirectory, 'lib');
+        const library = 'library';
+        let libDirectory = path.join(module.exports.baseDirectory, library);
         if (!fs.existsSync(libDirectory)) {
             fs.mkdirSync(libDirectory);
             result.push('Created ' + libDirectory);
         }
 
         let fnFile = path.join(libDirectory, fnName + '.js');
-        u.assert(() => !fs.existsSync(fnFile));
+        assert(() => !fs.existsSync(fnFile));
         fs.writeFileSync(fnFile, `
 const u = require("wlj-utilities");
 
@@ -72,7 +89,7 @@ function ${fnName}() {
     return result;
 }
 `);
-        u.assert(() => fs.existsSync(fnFile));
+        assert(() => fs.existsSync(fnFile));
         result.push('Created ' + fnFile);
 
         let testsDirectory = path.join(module.exports.baseDirectory, 'tests');
@@ -88,16 +105,16 @@ function ${fnName}() {
         }
 
         let testFile = path.join(fnTestDirectory, fnName + '.js');
-        u.assert(() => !fs.existsSync(testFile));
+        assert(() => !fs.existsSync(testFile));
         fs.writeFileSync(testFile, `
 const u = require("wlj-utilities");
-const ${fnName} = require("../../lib/${fnName}.js");
+const ${fnName} = require("../../${library}/${fnName}.js");
 
 u.scope(__filename, x => {
 
 });
 `);
-        u.assert(() => fs.existsSync(testFile));
+        assert(() => fs.existsSync(testFile));
         result.push('Created ' + testFile);
 
         let allTestsFile = path.join(module.exports.baseDirectory, 'test.js');
@@ -105,7 +122,7 @@ u.scope(__filename, x => {
             fs.writeFileSync(allTestsFile, '');
         }
         fs.appendFileSync(allTestsFile, EOL);
-        fs.appendFileSync(allTestsFile, `require("${testFile}");`)
+        fs.appendFileSync(allTestsFile, `require("./${testFile}");`)
         result.push('Finished');
     });
 
