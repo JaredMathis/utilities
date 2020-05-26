@@ -15,8 +15,8 @@ function isString(s) {
 }
 
 function processExit() {
-    let log = true;
-    if (log) {
+    processExit.log = false;
+    if (processExit.log) {
         let stack = new Error().stack;
         console.log(stack);
     }

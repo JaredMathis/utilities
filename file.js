@@ -113,7 +113,7 @@ function getPackageVersion(packageDirectory) {
 }
 
 function bumpPackageVersion(packageDirectory) {
-    let log = true;
+    bumpPackageVersion.log = false;
     scope(bumpPackageVersion.name, x => {
         assert(() => isString(packageDirectory));
         let version = getPackageVersion(packageDirectory);
@@ -136,6 +136,6 @@ function bumpPackageVersion(packageDirectory) {
 
         let json = JSON.stringify(package, null, 2);
         fs.writeFileSync(packagePath, json);
-        if (log) console.log(`Updated version to ${nextVersion} in ` + packagePath);
+        if (bumpPackageVersion.log) console.log(`Updated version to ${nextVersion} in ` + packagePath);
     })
 }
