@@ -1,5 +1,5 @@
 const isFunction = require('./../core').isFunction;
-const isUndefined = require('./../core').isUndefined;
+const isUndefined = require('./isUndefined');
 const truncateStringTo = require('./../log').truncateStringTo;
 
 module.exports = propertiesToString;

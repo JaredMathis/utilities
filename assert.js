@@ -1,14 +1,15 @@
 const scope = require('./library/scope');
+const isUndefined = require('./library/isUndefined');
+const merge = require('./library/merge');
+const assert = require('./library/assert');
 
 const {
-    merge,
     consoleLog,
     logProperties,
 } = require('./log');
 
 const {
     isDefined,
-    isUndefined,
     processExit,
     isInteger,
     isFunction,
@@ -17,7 +18,6 @@ const {
 const fs = require('fs');
 
 module.exports = {
-    assert,
     assertFileExists,
     assertAtLeast,
     assertAtMost,
@@ -26,39 +26,8 @@ module.exports = {
     assertIsEqualJson,
 };
 
-function assert(b, exitLambda) {
-
-    return scope(assert.name, context => {
-        let log = false;
-
-        if (log) console.log('assert entered');
-
-        let result;
-        if (isFunction(b)) {
-            result = b();
-        } else {
-            result = b;
-        }
-
-        if (result === true) {
-            if (log) console.log('assert satisified');
-            return;
-        }
-
-        merge(context, {result});
-        merge(context, {b});
-        return assertError(exitLambda);
-    });
-}
-
-function assertError(exitLambda) {
-    return scope(assertError.name, context => {
-        logProperties(context);
-        if (isUndefined(exitLambda)) {
-            exitLambda = processExit;
-        }
-        exitLambda();
-    });
+function assertError(name) {
+    throw new Error('Assert error: ' + name);
 }
 
 function fileExists(fileName) {
@@ -106,7 +75,7 @@ function assertIsEqual(left, right) {
         if (equals) {
             return;
         }
-        return assertError();
+        return assertError(assertIsEqual.name);
     });
 }
 
@@ -137,7 +106,7 @@ function assertIsEqualJson(left, right) {
         if (equals) {
             return;
         }
-        return assertError();
+        return assertError(assertIsEqualJson.name);
     });
 }
 
@@ -153,7 +122,7 @@ function assertAtLeast(left, right) {
         if (atLeast) {
             return;
         }
-        return assertError();
+        return assertError(assertAtLeast.name);
     });
 }
 
@@ -169,6 +138,6 @@ function assertAtMost(left, right) {
         if (atMost) {
             return;
         }
-        return assertError();
+        return assertError(assertAtMost.name);
     });
 }

@@ -1,6 +1,8 @@
+const isUndefined = require('./library/isUndefined');
+const assert = require('./library/assert');
+
 const {
     loop,
-    assert,
     isArray,
     isDistinct,
     isInteger,
@@ -11,7 +13,6 @@ const {
     scope,
     merge,
     arrayMin,
-    isUndefined,
     arrayAll,
 } = require('./all');
 

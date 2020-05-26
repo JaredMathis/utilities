@@ -44,10 +44,7 @@ function scope(name, lambda) {
                 current = current.innerError;
             }
 
-            if (!(e instanceof ScopeError)) {
-                console.log(e);
-            }
-
+            console.log(e);
             processExit();
         } else {
             throw new ScopeError(name, x, e);

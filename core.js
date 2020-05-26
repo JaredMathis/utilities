@@ -1,12 +1,9 @@
-/**
- * These functions have no dependencies
- */
+const isUndefined = require('./library/isUndefined');
 
 module.exports = {
     processExit,
     isEqualJson,
     isArray,
-    isUndefined,
     isDefined,
     isInteger,
     range,
@@ -23,7 +20,7 @@ function isString(s) {
 }
 
 function processExit() {
-    let log = false;
+    let log = true;
     if (log) {
         let stack = new Error().stack;
         console.log(stack);
@@ -34,10 +31,6 @@ function processExit() {
 
 function isEqualJson(a, b) {
     return JSON.stringify(a) === JSON.stringify(b);
-}
-
-function isUndefined(a) {
-    return typeof a === 'undefined';
 }
 
 function isDefined(a) {

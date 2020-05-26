@@ -7,10 +7,10 @@ const commandLine = require('./commandLine');
 const index = require('./index');
 
 module.exports = {};
-log.merge(module.exports, core);
-log.merge(module.exports, log);
-log.merge(module.exports, assert);
-log.merge(module.exports, file);
-log.merge(module.exports, tools);
-log.merge(module.exports, commandLine);
-log.merge(module.exports, index);
+index.merge(module.exports, core);
+index.merge(module.exports, log);
+index.merge(module.exports, assert);
+index.merge(module.exports, file);
+index.merge(module.exports, tools);
+index.merge(module.exports, commandLine);
+index.merge(module.exports, index);

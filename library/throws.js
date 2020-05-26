@@ -3,10 +3,7 @@ const {
 } = require("./../core");
 
 const scope = require("./../library/scope");
-
-const {
-    assert,
-} = require("./../assert");
+const assert = require("./../library/assert");
 
 module.exports = throws;
 

@@ -1,17 +1,15 @@
 const {
     isDefined,
     isString,
-    isUndefined,
 } = require('./core');
 
 const scope = require('./library/scope');
+const isUndefined = require('./library/isUndefined');
+
+const merge = require('./library/merge');
+const assert = require('./library/assert');
 
 const {
-    merge,
-} = require('./log');
-
-const {
-    assert,
     assertFileExists,
     assertIsEqual,
 } = require('./assert');

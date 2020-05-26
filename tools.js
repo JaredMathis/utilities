@@ -1,8 +1,11 @@
+const isUndefined = require('./library/isUndefined');
+const merge = require('./library/merge');
+const assert = require('./library/assert');
+
 const {
     isArray,
     isFunction,
     isDefined,
-    isUndefined,
     isString,
     isInteger,
 } = require('./core');
@@ -10,13 +13,8 @@ const {
 const scope = require('./library/scope');
 
 const {
-    merge,
     consoleLog,
 } = require('./log');
-
-const {
-    assert
-} = require('./assert');
 
 module.exports = {
     loop,
@@ -79,9 +77,25 @@ function toDictionary(array, property) {
 }
 
 function isArrayIndex(array, index) {
-    assert(() => isArray(array) || isString(array));
-    assert(() => isInteger(index));
-    return 0 <= index && index < array.length;
+    let result;
+    scope(isArrayIndex.name, x => {
+        merge(x,{array});
+        merge(x,{index});
+        let ia = isArray(array);
+        merge(x,{ia});
+        let is = isString(array);
+        merge(x,{is});
+        assert(() => ia || is);
+        let ii = isInteger(index);
+        merge(x,{ii});
+        assert(() => ii);
+        let lower = 0 <= index;
+        let upper = index < array.length;
+        merge(x,{lower});
+        merge(x,{upper});
+        result = lower && upper;
+    });
+    return result;
 }
 
 function arrayLast(array) {

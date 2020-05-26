@@ -1,6 +1,6 @@
 
-const scope = require("../library/scope");
-const merge = require("../log").merge;
+const scope = require("./scope");
+const merge = require("./merge");
 const isFunction = require("../core").isFunction;
 
 module.exports = assert;

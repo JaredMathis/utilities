@@ -5,9 +5,7 @@ const {
 } = require('./core');
 
 module.exports = {
-    //scope,
     consoleLog,
-    merge,
     logProperties,
     truncateStringTo,
 }
@@ -17,26 +15,6 @@ module.exports = {
 let indent = 0;
 
 let context = {};
-
-/**
- * Does something special with undefined.
- * @param {*} a 
- * @param {*} b 
- */
-function merge(a, b) {
-    if (isUndefined(a)) {
-        throw new Error('merge received undefined first argument');
-    }
-    if (isUndefined(b)) {
-        throw new Error('merge received undefined second argument');
-    }
-    for (let key in b) {
-        a[key] = b[key];
-        if (isUndefined(a[key])) {
-            a[key] = '[undefined]';
-        }
-    }
-}
 
 function isString(o) {
     return o.toString() === o;

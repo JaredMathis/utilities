@@ -5,6 +5,7 @@ const {
 
 const scope = require('./library/scope');
 const assert = require('./library/assert');
+const merge = require('./library/merge');
 
 const { 
     loop,
@@ -54,6 +55,7 @@ function commandLine() {
 function fn(args) {
     let result = [];
     scope(fn.name, x => {
+        merge(x, {args});
         assert(() => isArray(args));
 
         if (args.length !== 1) {

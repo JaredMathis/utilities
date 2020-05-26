@@ -32,3 +32,7 @@ require("./tests/assertIsJsonResponse/assertIsJsonResponse.js");
 require("./tests/propertiesToString/propertiesToString.js");
 require("./tests/scope/scope");
 require("./tests/toQueryString/toQueryString.js");
+require("./tests/propertiesAreEqual/propertiesAreEqual.js");
+require("./tests/assertIsStringArray/assertIsStringArray.js");
+require("./tests/assertOnlyContainsProperties/assertOnlyContainsProperties.js");
+require("./tests/merge/merge.js");
