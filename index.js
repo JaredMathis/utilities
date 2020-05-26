@@ -10,3 +10,5 @@ module.exports.propertiesAreEqual = require("./library/propertiesAreEqual.js");
 module.exports.assertIsStringArray = require("./library/assertIsStringArray.js");
 module.exports.assertOnlyContainsProperties = require("./library/assertOnlyContainsProperties.js");
 module.exports.merge = require("./library/merge.js");
+module.exports.arrayExcept = require("./library/arrayExcept.js");
+module.exports.isArray = require("./library/isArray.js");

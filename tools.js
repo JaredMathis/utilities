@@ -1,9 +1,9 @@
 const isUndefined = require('./library/isUndefined');
 const merge = require('./library/merge');
 const assert = require('./library/assert');
+const isArray = require('./library/isArray');
 
 const {
-    isArray,
     isFunction,
     isDefined,
     isString,

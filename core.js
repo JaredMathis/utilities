@@ -3,16 +3,11 @@ const isUndefined = require('./library/isUndefined');
 module.exports = {
     processExit,
     isEqualJson,
-    isArray,
     isDefined,
     isInteger,
     range,
     isFunction,
     isString,
-}
-
-function isArray(a) {
-    return Array.isArray(a);
 }
 
 function isString(s) {

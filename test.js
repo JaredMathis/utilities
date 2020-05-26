@@ -36,3 +36,5 @@ require("./tests/propertiesAreEqual/propertiesAreEqual.js");
 require("./tests/assertIsStringArray/assertIsStringArray.js");
 require("./tests/assertOnlyContainsProperties/assertOnlyContainsProperties.js");
 require("./tests/merge/merge.js");
+require("./tests/arrayExcept/arrayExcept.js");
+require("./tests/isArray/isArray.js");

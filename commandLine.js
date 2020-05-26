@@ -1,11 +1,11 @@
 const { 
-    isArray,
     isString,
 } = require('./core');
 
 const scope = require('./library/scope');
 const assert = require('./library/assert');
 const merge = require('./library/merge');
+const isArray = require('./library/isArray');
 
 const { 
     loop,
