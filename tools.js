@@ -1,3 +1,4 @@
+const isInteger = require('./library/isInteger');
 const isUndefined = require('./library/isUndefined');
 const merge = require('./library/merge');
 const assert = require('./library/assert');
@@ -7,7 +8,6 @@ const {
     isFunction,
     isDefined,
     isString,
-    isInteger,
 } = require('./core');
 
 const scope = require('./library/scope');

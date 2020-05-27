@@ -13,3 +13,6 @@ module.exports.merge = require("./library/merge.js");
 module.exports.arrayExcept = require("./library/arrayExcept.js");
 module.exports.isArray = require("./library/isArray.js");
 module.exports.assertThrows = require("./library/assertThrows.js");
+module.exports.arrayContainsDuplicates = require("./library/arrayContainsDuplicates.js");
+module.exports.range = require("./library/range.js");
+module.exports.isInteger = require("./library/isInteger.js");

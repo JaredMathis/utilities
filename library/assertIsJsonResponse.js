@@ -1,9 +1,9 @@
 const scope = require("./scope");
 const assert = require("./assert");
 const merge = require("./merge");
+const isInteger = require("./isInteger");
 const isDefined = require("./../core").isDefined;
 const isFunction = require("./../core").isFunction;
-const isInteger = require("./../core").isInteger;
 
 module.exports = assertIsJsonResponse;
 

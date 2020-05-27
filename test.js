@@ -39,3 +39,6 @@ require("./tests/merge/merge.js");
 require("./tests/arrayExcept/arrayExcept.js");
 require("./tests/isArray/isArray.js");
 require("./tests/assertThrows/assertThrows.js");
+require("./tests/arrayContainsDuplicates/arrayContainsDuplicates.js");
+require("./tests/range/range.js");
+require("./tests/isInteger/isInteger.js");
