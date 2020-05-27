@@ -2,7 +2,7 @@
   "name": "wlj-utilities",
   "version": "1.0.32",
   "description": "",
-  "main": "all.js",
+  "main": "index.js",
   "directories": {
     "test": "tests"
   },

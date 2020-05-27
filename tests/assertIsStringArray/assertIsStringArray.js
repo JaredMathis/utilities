@@ -1,5 +1,5 @@
 
-const u = require("../../all");
+const u = require("../../index");
 
 const assertIsStringArray = require("../../library/assertIsStringArray.js");
 

@@ -5,7 +5,7 @@ const {
     scope,
     assertIsEqualJson,
     assertIsEqual,
-} = require('../all');
+} = require('../index');
 
 function arrayToBigNumber(array) {
     let result = array.map(a => new BigNumber(a));

@@ -1,4 +1,4 @@
-const u = require("../../all");
+const u = require("../../index");
 const assertIsJsonResponse = require("../../library/assertIsJsonResponse.js");
 
 u.scope(__filename, x => {

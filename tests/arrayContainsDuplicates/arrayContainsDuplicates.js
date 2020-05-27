@@ -1,5 +1,5 @@
 
-const u = require("../../all");
+const u = require("../../index");
 
 const arrayContainsDuplicates = require("../../library/arrayContainsDuplicates.js");
 

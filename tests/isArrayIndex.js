@@ -2,7 +2,7 @@ const {
     scope,
     isArrayIndex,
     assertIsEqual
-} = require('../all');
+} = require('../index');
 
 scope(__filename, context => {
     assertIsEqual(() => isArrayIndex([], 0), false);

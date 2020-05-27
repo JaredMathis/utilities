@@ -7,7 +7,7 @@ const {
     assertIsEqualJson,
     assertIsEqual,
     merge,
-} = require('../all');
+} = require('../index');
 
 scope(__filename, context => {
 

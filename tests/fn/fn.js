@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const u = require('../../all');
+const u = require('../../index');
 const commands = require('../../commandLine');
 
 const log = true;

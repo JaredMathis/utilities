@@ -3,7 +3,7 @@ const {
     arrayCount,
     assertIsEqual,
     stringSuffix,
-} = require('../all');
+} = require('../index');
 
 scope(__filename, context => {
     assertIsEqual(() => stringSuffix('abc', 1), 'c');

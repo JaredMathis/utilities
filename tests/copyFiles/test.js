@@ -1,4 +1,4 @@
-const u = require('../../all');
+const u = require('../../index');
 const fs = require('fs');
 const path = require('path');
 

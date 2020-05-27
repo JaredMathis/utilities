@@ -15,7 +15,7 @@ const {
     arrayCount,
     merge,
     scope,
-} = require('../all');
+} = require('../index');
 
 scope(__filename, context => {
     let clauses;

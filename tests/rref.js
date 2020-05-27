@@ -4,7 +4,7 @@ const {
     scope,
     assertIsEqualJson,
     assertIsEqual,
-} = require('../all');
+} = require('../index');
 
 scope(__filename, context => {
     assertIsEqualJson(() => rref([

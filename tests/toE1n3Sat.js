@@ -5,7 +5,7 @@ const {
 const {
     scope,
     assertIsEqualJson,
-} = require('../all');
+} = require('../index');
 
 scope(__filename, context => {
     let clauses = [[1],[-1]];

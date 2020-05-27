@@ -1,5 +1,5 @@
 
-const u = require("../../all");
+const u = require("../../index");
 const throws = require("../../library/throws.js");
 
 u.scope(__filename, x => {

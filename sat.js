@@ -14,7 +14,7 @@ const {
     merge,
     arrayMin,
     arrayAll,
-} = require('./all');
+} = require('./index');
 
 const rref = require('rref');
 

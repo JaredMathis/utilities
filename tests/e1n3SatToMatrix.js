@@ -16,7 +16,7 @@ const {
     arrayCount,
     scope,
     assertIsEqualJson,
-} = require('../all');
+} = require('../index');
 
 scope(__filename, context => {
     let solution = [1,-2,-3];

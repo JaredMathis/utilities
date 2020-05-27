@@ -1,5 +1,5 @@
 
-const u = require("../../all");
+const u = require("../../index");
 const assertIsEqualJson = require("../../library/assertIsEqualJson.js");
 
 u.scope(__filename, x => {
