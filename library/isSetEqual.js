@@ -11,19 +11,12 @@ function isSetEqual(a, b) {
         assert(() => isArray(a));
         assert(() => isArray(b));
 
-        result = aMatchesB(a, b)
-            && aMatchesB(b, a);
+        result = isSubset(a, b)
+            && isSubset(b, a);
 
-        function aMatchesB(a, b) {
+        function isSubset(a, b) {
             for (let i of a) {
-                let matches = false;
-                for (let j of b) {
-                    if (j === i) {
-                        matches = true;
-                        break;
-                    }
-                }
-                if (!matches) {
+                if (!b.includes(i)) {
                     return false;
                 }
             }
