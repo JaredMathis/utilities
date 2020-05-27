@@ -25,3 +25,4 @@ module.exports.isString = require("./library/isString.js");
 module.exports.isSetEqual = require("./library/isSetEqual.js");
 module.exports.config = require("./library/config.js");
 module.exports.arraySingle = require("./library/arraySingle.js");
+module.exports.propertiesAreEqual = require("./library/propertiesAreEqual.js");

@@ -46,3 +46,4 @@ require("./tests/isString/isString.js");
 require("./tests/isSetEqual/isSetEqual.js");
 require("./tests/config/config.js");
 require("./tests/arraySingle/arraySingle.js");
+require("./tests/propertiesAreEqual/propertiesAreEqual.js");
