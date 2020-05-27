@@ -83,7 +83,7 @@ module.exports = ${fnName};
 function ${fnName}() {
     let result;
     ${module.exports.isWljUtilitiesPackage ? '' : 'u.'}scope(${fnName}.name, x => {
-
+        // TODO
     });
     return result;
 }
@@ -106,12 +106,12 @@ function ${fnName}() {
         let testFile = path.join(fnTestDirectory, fnName + '.js');
         assert(() => !fs.existsSync(testFile));
         fs.writeFileSync(testFile, `
-const u = require("${module.exports.isWljUtilitiesPackage ? '../../all' : 'wlj-utilities' }");
+const u = require("${module.exports.isWljUtilitiesPackage ? '../../index' : 'wlj-utilities' }");
 
 const ${fnName} = require("../../${library}/${fnName}.js");
 
 u.scope(__filename, x => {
-
+    // TODO
 });
 `);
         assert(() => fs.existsSync(testFile));
