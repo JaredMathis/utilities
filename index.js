@@ -15,7 +15,6 @@ module.exports.toQueryString = require("./library/toQueryString.js");
 module.exports.propertiesAreEqual = require("./library/propertiesAreEqual.js");
 module.exports.assertIsStringArray = require("./library/assertIsStringArray.js");
 module.exports.assertOnlyContainsProperties = require("./library/assertOnlyContainsProperties.js");
-
 module.exports.arrayExcept = require("./library/arrayExcept.js");
 module.exports.isArray = require("./library/isArray.js");
 module.exports.assertThrows = require("./library/assertThrows.js");
@@ -23,3 +22,4 @@ module.exports.arrayContainsDuplicates = require("./library/arrayContainsDuplica
 module.exports.range = require("./library/range.js");
 module.exports.isInteger = require("./library/isInteger.js");
 module.exports.isString = require("./library/isString.js");
+module.exports.isSetEqual = require("./library/isSetEqual.js");

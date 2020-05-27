@@ -43,3 +43,4 @@ require("./tests/arrayContainsDuplicates/arrayContainsDuplicates.js");
 require("./tests/range/range.js");
 require("./tests/isInteger/isInteger.js");
 require("./tests/isString/isString.js");
+require("./tests/isSetEqual/isSetEqual.js");
