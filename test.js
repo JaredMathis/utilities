@@ -38,3 +38,4 @@ require("./tests/assertOnlyContainsProperties/assertOnlyContainsProperties.js");
 require("./tests/merge/merge.js");
 require("./tests/arrayExcept/arrayExcept.js");
 require("./tests/isArray/isArray.js");
+require("./tests/assertThrows/assertThrows.js");

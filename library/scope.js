@@ -8,7 +8,7 @@ module.exports = scope;
 let count = 0;
 
 function scope(name, lambda) {
-    scope.log = false;
+    let log = true;
 
     count++;
 
@@ -28,6 +28,8 @@ function scope(name, lambda) {
         count--;
 
         if (count === 0) {
+            if (log) console.log(e);
+
             let indent = '  ';
             console.log(name + ' entered');
             let properties = propertiesToString(x, indent);
@@ -46,7 +48,6 @@ function scope(name, lambda) {
                 current = current.innerError;
             }
 
-            if (scope.log) console.log(e);
             processExit();
         } else {
             throw new ScopeError(name, x, e);

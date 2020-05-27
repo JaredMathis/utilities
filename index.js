@@ -12,3 +12,4 @@ module.exports.assertOnlyContainsProperties = require("./library/assertOnlyConta
 module.exports.merge = require("./library/merge.js");
 module.exports.arrayExcept = require("./library/arrayExcept.js");
 module.exports.isArray = require("./library/isArray.js");
+module.exports.assertThrows = require("./library/assertThrows.js");
