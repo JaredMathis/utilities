@@ -1,9 +1,6 @@
-const {
-    isFunction,
-} = require("./../core");
-
 const scope = require("./../library/scope");
 const assert = require("./../library/assert");
+const isFunction = require("./../library/isFunction");
 
 module.exports = throws;
 

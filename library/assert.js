@@ -1,7 +1,7 @@
 
 const scope = require("./scope");
 const merge = require("./merge");
-const isFunction = require("../core").isFunction;
+const isFunction = require("./isFunction");
 
 module.exports = assert;
 

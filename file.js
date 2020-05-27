@@ -5,7 +5,7 @@ const {
 const scope = require('./library/scope');
 const isString = require('./library/isString');
 const isUndefined = require('./library/isUndefined');
-
+const loop = require('./library/loop');
 const merge = require('./library/merge');
 const assert = require('./library/assert');
 
@@ -13,10 +13,6 @@ const {
     assertFileExists,
     assertIsEqual,
 } = require('./assert');
-
-const {
-    loop,
-} = require('./tools');
 
 const fs = require('fs');
 const path = require('path');

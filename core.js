@@ -6,7 +6,6 @@ module.exports = {
     processExit,
     isEqualJson,
     isDefined,
-    isFunction,
 }
 
 function processExit() {
@@ -29,8 +28,4 @@ function isEqualJson(a, b) {
 
 function isDefined(a) {
     return !isUndefined(a);
-}
-
-function isFunction(functionToCheck) {
-    return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
 }

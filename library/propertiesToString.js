@@ -1,4 +1,4 @@
-const isFunction = require('./../core').isFunction;
+const isFunction = require('./../library/isFunction');
 const isUndefined = require('./isUndefined');
 const truncateStringTo = require('./../log').truncateStringTo;
 

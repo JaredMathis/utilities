@@ -4,20 +4,19 @@ const merge = require('./library/merge');
 const assert = require('./library/assert');
 const isArray = require('./library/isArray');
 const isString = require('./library/isString');
+const scope = require('./library/scope');
+const loop = require('./library/loop');
 
 const {
     isFunction,
     isDefined,
 } = require('./core');
 
-const scope = require('./library/scope');
-
 const {
     consoleLog,
 } = require('./log');
 
 module.exports = {
-    loop,
     toDictionary,
     isArrayIndex,
     arrayLast,
@@ -32,29 +31,6 @@ module.exports = {
     stringSuffix,
 };
 
-/**
- * Return true to break out of loop.
- */
-function loop(array, lambda) {
-    let log = false;
-    scope(loop.name, context => {
-        merge(context, {array});
-        merge(context, {lambda});
-
-        assert(() => isArray(array));
-        assert(() => isFunction(lambda));
-    
-        for (let index = 0; index < array.length; index++) {
-            merge(context, {index});
-            let element = array[index];
-            merge(context, {element});
-            let breakLoop = lambda(element, index);
-            if (breakLoop) {
-                break;
-            }
-        }
-    })
-}
 
 function toDictionary(array, property) {
     let result = {};

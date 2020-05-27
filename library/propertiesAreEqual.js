@@ -2,6 +2,7 @@
 const scope = require("./scope");
 const assertIsStringArray = require("./assertIsStringArray");
 const merge = require("./merge");
+const loop = require("./loop");
 
 module.exports = propertiesAreEqual;
 
@@ -12,13 +13,13 @@ function propertiesAreEqual(a, b, properties) {
         assertIsStringArray(properties);
 
         result = true;
-        for (let property in a) {
+        loop(properties, property => {
             let equal = a[property] === b[property];
             if (!equal) {
                 result = false;
-                return;
+                return true;
             }
-        }
+        });
     });
     return result;
 }

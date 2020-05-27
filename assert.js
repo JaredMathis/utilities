@@ -2,6 +2,8 @@ const scope = require('./library/scope');
 const isUndefined = require('./library/isUndefined');
 const merge = require('./library/merge');
 const assert = require('./library/assert');
+const isFunction = require('./library/isFunction');
+
 
 const {
     consoleLog,
@@ -12,7 +14,6 @@ const {
     isDefined,
     processExit,
     isInteger,
-    isFunction,
 } = require('./core');
 
 const fs = require('fs');
