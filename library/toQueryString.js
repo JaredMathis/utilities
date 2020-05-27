@@ -3,7 +3,7 @@ const scope = require("./scope");
 const assert = require("./assert");
 const merge = require("./merge");
 const isDefined = require("./../core").isDefined;
-const isString = require("./../core").isString;
+const isString = require("./isString");
 
 module.exports = toQueryString;
 

@@ -3,11 +3,11 @@ const isUndefined = require('./library/isUndefined');
 const merge = require('./library/merge');
 const assert = require('./library/assert');
 const isArray = require('./library/isArray');
+const isString = require('./library/isString');
 
 const {
     isFunction,
     isDefined,
-    isString,
 } = require('./core');
 
 const scope = require('./library/scope');

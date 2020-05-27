@@ -1,7 +1,4 @@
-const { 
-    isString,
-} = require('./core');
-
+const isString = require('./library/isString');
 const scope = require('./library/scope');
 const assert = require('./library/assert');
 const merge = require('./library/merge');

@@ -22,3 +22,4 @@ module.exports.assertThrows = require("./library/assertThrows.js");
 module.exports.arrayContainsDuplicates = require("./library/arrayContainsDuplicates.js");
 module.exports.range = require("./library/range.js");
 module.exports.isInteger = require("./library/isInteger.js");
+module.exports.isString = require("./library/isString.js");

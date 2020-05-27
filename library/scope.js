@@ -1,4 +1,4 @@
-const isString = require("../core").isString;
+const isString = require("./isString");
 const isFunction = require("../core").isFunction;
 const processExit = require("../core").processExit;
 const propertiesToString = require("./propertiesToString");

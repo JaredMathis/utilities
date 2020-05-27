@@ -1,15 +1,11 @@
 const isUndefined = require('./library/isUndefined');
+const isString = require('./library/isString');
 
 module.exports = {
     processExit,
     isEqualJson,
     isDefined,
     isFunction,
-    isString,
-}
-
-function isString(s) {
-    return (s + "") === s;
 }
 
 function processExit() {

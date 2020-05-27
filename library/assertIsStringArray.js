@@ -2,7 +2,7 @@
 const assert = require("./assert");
 const scope = require("./scope");
 const isArray = require("./isArray");
-const isString = require("./../core").isString;
+const isString = require("./isString");
 
 module.exports = assertIsStringArray;
 

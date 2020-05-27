@@ -1,9 +1,9 @@
 const {
     isDefined,
-    isString,
 } = require('./core');
 
 const scope = require('./library/scope');
+const isString = require('./library/isString');
 const isUndefined = require('./library/isUndefined');
 
 const merge = require('./library/merge');
