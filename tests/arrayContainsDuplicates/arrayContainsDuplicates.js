@@ -9,4 +9,5 @@ u.scope(__filename, x => {
     u.assert(() => arrayContainsDuplicates([1,2,1,3]) === true);
     u.assert(() => arrayContainsDuplicates([1,2,2,3]) === true);
     u.assert(() => arrayContainsDuplicates([1,2,3,3]) === true);
+    u.assert(() => arrayContainsDuplicates(['a','a']) === true);
 });
