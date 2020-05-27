@@ -2,14 +2,13 @@ const isString = require("./isString");
 const isFunction = require("../core").isFunction;
 const processExit = require("../core").processExit;
 const propertiesToString = require("./propertiesToString");
+const config = require("./config");
 
 module.exports = scope;
 
 let count = 0;
 
 function scope(name, lambda) {
-    let log = true;
-
     count++;
 
     let result;
@@ -28,8 +27,6 @@ function scope(name, lambda) {
         count--;
 
         if (count === 0) {
-            if (log) console.log(e);
-
             let indent = '  ';
             console.log(name + ' entered');
             let properties = propertiesToString(x, indent);
@@ -47,6 +44,7 @@ function scope(name, lambda) {
                 }
                 current = current.innerError;
             }
+            if (config.log.scopeError) console.log(current);
 
             processExit();
         } else {

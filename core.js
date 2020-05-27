@@ -1,5 +1,6 @@
 const isUndefined = require('./library/isUndefined');
 const isString = require('./library/isString');
+const config = require('./library/config');
 
 module.exports = {
     processExit,
@@ -14,8 +15,12 @@ function processExit() {
         let stack = new Error().stack;
         console.log(stack);
     }
-    console.log('Calling process.exit(1)');
-    process.exit(1);
+    if (config.processExit) {
+        console.log('Calling process.exit(1)');
+        process.exit(1);
+    } else {
+        console.log('config.processExit is false; Not calling process.exit(1)');
+    }
 }
 
 function isEqualJson(a, b) {
