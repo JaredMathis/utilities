@@ -4,11 +4,11 @@ const assert = require("./assert");
 const assertOnlyContainsProperties = require("./assertOnlyContainsProperties");
 const assertIsStringArray = require("./assertIsStringArray");
 
-module.exports = propertiesAreEqual;
+module.exports = propertiesAreEqualAndOnlyContainsProperties;
 
-function propertiesAreEqual(a, b, properties) {
+function propertiesAreEqualAndOnlyContainsProperties(a, b, properties) {
     let result;
-    scope(propertiesAreEqual.name, x => {
+    scope(propertiesAreEqualAndOnlyContainsProperties.name, x => {
 
         assertIsStringArray(properties);
 

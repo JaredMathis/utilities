@@ -8,7 +8,7 @@ function arraySingle(array, matcher) {
     let result;
     scope(arraySingle.name, x => {
         // loop(array, a => {
-        //     if (propertiesAreEqual())
+        //     if (propertiesAreEqualAndOnlyContainsProperties())
         // })
     });
     return result;
