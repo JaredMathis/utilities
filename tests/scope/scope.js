@@ -25,7 +25,7 @@ scope(__filename, x => {
             });
         });
     } catch (e) {
-        let expected = '{"name":"a","context":{"c":2},"innerError":{"name":"d","context":{"e":2},"innerError":{"name":"assert","context":{"b":false,"bValue":false},"innerError":{}}}}';
+        let expected = '{"name":"a","context":{"c":2},"innerError":{"name":"d","context":{"e":2},"innerError":{"name":"assert","context":{"b":false},"innerError":{}}}}';
         u.merge(x, {expected});
         let actual = JSON.stringify(e);
         u.merge(x, {actual});

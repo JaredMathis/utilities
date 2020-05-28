@@ -12,11 +12,12 @@ function assert(b) {
 
         let bValue;
         if (isFunction(b)) {
+            merge(x, b);
             bValue = b();
+            merge(x, {bValue});
         } else {
             bValue = b;
         }
-        merge(x, {bValue});
 
         if (bValue) {
             return;
