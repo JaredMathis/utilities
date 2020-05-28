@@ -3,6 +3,7 @@ const scope = require('./library/scope');
 const assert = require('./library/assert');
 const merge = require('./library/merge');
 const isArray = require('./library/isArray');
+const isUndefined = require('./library/isUndefined');
 
 const { 
     loop,
@@ -22,11 +23,13 @@ module.exports = {
     isWljUtilitiesPackage: false
 };
 
-function commandLine() {
+function commandLine(commands) {
     scope(commandLine.name, x=> {
-        let commands = {
-            fn,
-        };
+        if (isUndefined(commands)) {
+            commands = {
+                fn,
+            };
+        }
 
         let command = commands[process.argv[2]];
         if (!command) {
