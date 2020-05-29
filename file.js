@@ -131,7 +131,7 @@ function bumpPackageVersion(packageDirectory) {
         fs.writeFileSync(packagePath, json);
         if (log) console.log(`Updated version to ${nextVersion} in ` + packagePath);
 
-        result = nextBuild;
+        result = nextVersion;
     });
     return result;
 }

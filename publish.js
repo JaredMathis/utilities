@@ -2,10 +2,10 @@ const {
     execSync,
 } = require("child_process");
 
+const u = require('./all');
+
 // Run tests before bumping.
 require('./test');
-
-const u = require('./all');
 
 let bumped = u.bumpPackageVersion(__dirname);
 
