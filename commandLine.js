@@ -43,9 +43,7 @@ function commandLine(commands) {
             console.log('Calling: ' + command.name);
             console.log('Args: ' + remaining);
         }
-        let result = command(remaining);
-        console.log(result);
-    
+        command(remaining);    
     });
 }
 
