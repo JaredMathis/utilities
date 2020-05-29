@@ -4,10 +4,7 @@ const assert = require('./library/assert');
 const merge = require('./library/merge');
 const isArray = require('./library/isArray');
 const isUndefined = require('./library/isUndefined');
-
-const { 
-    loop,
-} = require('./tools');
+const loop = require('./library/loop');
 
 const fs = require('fs');
 const path = require('path');
