@@ -3,7 +3,7 @@ const scope = require("./scope");
 const assert = require("./assert");
 const merge = require("./merge");
 const assertIsStringArray = require("./assertIsStringArray");
-const isDefined = require("./../core").isDefined;
+const isDefined = require("./isDefined");
 
 module.exports = assertOnlyContainsProperties;
 

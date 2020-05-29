@@ -5,7 +5,6 @@ const config = require('./library/config');
 module.exports = {
     processExit,
     isEqualJson,
-    isDefined,
 }
 
 function processExit() {
@@ -24,8 +23,4 @@ function processExit() {
 
 function isEqualJson(a, b) {
     return JSON.stringify(a) === JSON.stringify(b);
-}
-
-function isDefined(a) {
-    return !isUndefined(a);
 }

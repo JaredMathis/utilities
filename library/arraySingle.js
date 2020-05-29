@@ -4,7 +4,8 @@ const loop = require("./loop");
 const propertiesAreEqual = require("./propertiesAreEqual");
 const merge = require("./merge");
 const assert = require("./assert");
-const isUndefined = require("./isUndefined");
+const isArray = require("./isArray");
+const isDefined = require("./isDefined");
 
 module.exports = arraySingle;
 
@@ -12,6 +13,8 @@ function arraySingle(array, matcher) {
     let result;
     scope(arraySingle.name, x => {
         merge(x,{array,matcher})
+        assert(() => isArray(array));
+        assert(() => isDefined(matcher));
         let found = false;
         let keys = Object.keys(matcher);
         merge(x,{keys})

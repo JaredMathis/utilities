@@ -49,3 +49,4 @@ require("./tests/isSetEqual/isSetEqual.js");
 require("./tests/config/config.js");
 require("./tests/arraySingle/arraySingle.js");
 require("./tests/stringTrimLambdaPrefix/stringTrimLambdaPrefix.js");
+require("./tests/isDefined/isDefined.js");

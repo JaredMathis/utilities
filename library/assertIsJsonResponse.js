@@ -3,7 +3,7 @@ const assert = require("./assert");
 const merge = require("./merge");
 const isInteger = require("./isInteger");
 const isFunction = require("./isFunction");
-const isDefined = require("./../core").isDefined;
+const isDefined = require("./isDefined");
 
 module.exports = assertIsJsonResponse;
 

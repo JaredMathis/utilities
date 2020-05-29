@@ -1,10 +1,6 @@
-const {
-    isDefined,
-} = require('./core');
-
 const scope = require('./library/scope');
 const isString = require('./library/isString');
-const isUndefined = require('./library/isUndefined');
+const isDefined = require('./library/isDefined');
 const loop = require('./library/loop');
 const merge = require('./library/merge');
 const assert = require('./library/assert');

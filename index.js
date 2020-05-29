@@ -29,3 +29,4 @@ module.exports.arraySingle = require("./library/arraySingle.js");
 module.exports.propertiesAreEqual = require("./library/propertiesAreEqual.js");
 module.exports.loop = require("./library/loop.js");
 module.exports.stringTrimLambdaPrefix = require("./library/stringTrimLambdaPrefix.js");
+module.exports.isDefined = require("./library/isDefined.js");

@@ -1,6 +1,6 @@
 const assert = require("./assert");
 const scope = require('./scope');
-const isDefined = require("../core").isDefined;
+const isDefined = require("./isDefined");
 const isFunction = require("./isFunction");
 const merge = require("./merge");
 
