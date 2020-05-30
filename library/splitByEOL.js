@@ -1,12 +1,15 @@
 
 const scope = require("./scope");
+const assertIsString = require("./assertIsString");
+const helpers = require('./helpers');
 
 module.exports = splitByEOL;
 
-function splitByEOL() {
+function splitByEOL(text) {
     let result;
     scope(splitByEOL.name, x => {
-        // TODO
+        assertIsString(() => text);
+        result = text.split(helpers.EOL);
     });
     return result;
 }

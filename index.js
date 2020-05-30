@@ -32,5 +32,7 @@ module.exports.stringTrimLambdaPrefix = require("./library/stringTrimLambdaPrefi
 module.exports.isDefined = require("./library/isDefined.js");
 module.exports.isUndefined = require("./library/isUndefined.js");
 module.exports.getUniqueFileName = require("./library/getUniqueFileName.js");
-module.exports.merge(module.exports, require("./library/helpers.js"));
+module.exports.EOL = require("./library/helpers.js").EOL;
 module.exports.splitByEOL = require("./library/splitByEOL.js");
+module.exports.assertIsString = require("./library/assertIsString.js");
+module.exports.unwrapIfLambda = require("./library/unwrapIfLambda.js");

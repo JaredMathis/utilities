@@ -53,3 +53,5 @@ require("./tests/isDefined/isDefined.js");
 require("./tests/getUniqueFileName/getUniqueFileName.js");
 require("./tests/helpers/helpers.js");
 require("./tests/splitByEOL/splitByEOL.js");
+require("./tests/assertIsString/assertIsString.js");
+require("./tests/unwrapIfLambda/unwrapIfLambda.js");

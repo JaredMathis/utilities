@@ -106,7 +106,8 @@ const u = require("${module.exports.isWljUtilitiesPackage ? '../../index' : 'wlj
 const ${fnName} = require("../../${library}/${fnName}.js");
 
 u.scope(__filename, x => {
-    // TODO
+    // TODO: Fix broken test
+    u.assert(false);
 });
 `);
         assert(() => fs.existsSync(testFile));
