@@ -30,4 +30,5 @@ module.exports.propertiesAreEqual = require("./library/propertiesAreEqual.js");
 module.exports.loop = require("./library/loop.js");
 module.exports.stringTrimLambdaPrefix = require("./library/stringTrimLambdaPrefix.js");
 module.exports.isDefined = require("./library/isDefined.js");
+module.exports.isUndefined = require("./library/isUndefined.js");
 module.exports.getUniqueFileName = require("./library/getUniqueFileName.js");

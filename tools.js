@@ -1,20 +1,11 @@
 const isInteger = require('./library/isInteger');
-const isUndefined = require('./library/isUndefined');
+const isDefined = require('./library/isDefined');
 const merge = require('./library/merge');
 const assert = require('./library/assert');
 const isArray = require('./library/isArray');
 const isString = require('./library/isString');
 const scope = require('./library/scope');
 const loop = require('./library/loop');
-
-const {
-    isFunction,
-    isDefined,
-} = require('./core');
-
-const {
-    consoleLog,
-} = require('./log');
 
 module.exports = {
     toDictionary,
