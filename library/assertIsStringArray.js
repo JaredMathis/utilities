@@ -5,6 +5,7 @@ const isArray = require("./isArray");
 const isString = require("./isString");
 const merge = require("./merge");
 const unwrapIfLambda = require("./unwrapIfLambda");
+const loop = require("./loop");
 
 module.exports = assertIsStringArray;
 
@@ -15,9 +16,9 @@ function assertIsStringArray(array) {
         let value = unwrapIfLambda(array);
         assert(() => isArray(value));
 
-        for (let a of value) {
-            assert(() => isString(a));
-        }
+        loop(value, v => {
+            assert(() => isString(v));
+        });
     });
     return result;
 }
