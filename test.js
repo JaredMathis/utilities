@@ -51,3 +51,5 @@ require("./tests/arraySingle/arraySingle.js");
 require("./tests/stringTrimLambdaPrefix/stringTrimLambdaPrefix.js");
 require("./tests/isDefined/isDefined.js");
 require("./tests/getUniqueFileName/getUniqueFileName.js");
+require("./tests/helpers/helpers.js");
+require("./tests/splitByEOL/splitByEOL.js");
