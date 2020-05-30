@@ -55,3 +55,4 @@ require("./tests/helpers/helpers.js");
 require("./tests/splitByEOL/splitByEOL.js");
 require("./tests/assertIsString/assertIsString.js");
 require("./tests/unwrapIfLambda/unwrapIfLambda.js");
+require("./tests/assertIsStringArrayNested/assertIsStringArrayNested.js");

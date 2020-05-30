@@ -36,3 +36,4 @@ module.exports.EOL = require("./library/helpers.js").EOL;
 module.exports.splitByEOL = require("./library/splitByEOL.js");
 module.exports.assertIsString = require("./library/assertIsString.js");
 module.exports.unwrapIfLambda = require("./library/unwrapIfLambda.js");
+module.exports.assertIsStringArrayNested = require("./library/assertIsStringArrayNested.js");
