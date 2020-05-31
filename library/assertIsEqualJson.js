@@ -11,8 +11,6 @@ function assertIsEqualJson(left, right) {
     scope(assertIsEqualJson.name, x => {
         merge(x, {left});
         merge(x, {right});
-        assert(() => isDefined(left));
-        assert(() => isDefined(right));
 
         let leftValue;
         if (isFunction(left)) {
@@ -30,6 +28,8 @@ function assertIsEqualJson(left, right) {
         }
         merge(x, {rightValue});
 
+        assert(() => isDefined(left));
+        assert(() => isDefined(right));
         assert(() => JSON.stringify(leftValue) === JSON.stringify(rightValue));
     });
     return result;
