@@ -56,3 +56,5 @@ require("./tests/splitByEOL/splitByEOL.js");
 require("./tests/assertIsString/assertIsString.js");
 require("./tests/unwrapIfLambda/unwrapIfLambda.js");
 require("./tests/assertIsStringArrayNested/assertIsStringArrayNested.js");
+require("./tests/arraySequenceEquals/arraySequenceEquals.js");
+require("./tests/assertIsArray/assertIsArray.js");
