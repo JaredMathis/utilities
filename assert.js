@@ -12,7 +12,6 @@ module.exports = {
     assertAtMost,
     assertIsEqual,
     assertIsDefined,
-    assertIsEqualJson,
 };
 
 function assertError(name) {
@@ -65,37 +64,6 @@ function assertIsEqual(left, right) {
             return;
         }
         return assertError(assertIsEqual.name);
-    });
-}
-
-function assertIsEqualJson(left, right) {
-    return scope(assertIsEqualJson.name, context => {
-        merge(context, {left});
-        merge(context, {right});
-
-        assertIsDefined(left);
-        assertIsDefined(right);
-
-        let leftValue;
-        if (isFunction(left)) {
-            leftValue = left();
-        } else {
-            leftValue = left;
-        }
-        merge(context, {leftValue});
-        let rightValue;
-        if (isFunction(right)) {
-            rightValue = right();
-        } else {
-            rightValue = right;
-        }
-        merge(context, {rightValue});
-
-        let equals = JSON.stringify(leftValue) === JSON.stringify(rightValue);
-        if (equals) {
-            return;
-        }
-        return assertError(assertIsEqualJson.name);
     });
 }
 
