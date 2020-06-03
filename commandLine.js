@@ -104,6 +104,7 @@ function ${fnName}() {
 const u = require("${module.exports.isWljUtilitiesPackage ? '../../index' : 'wlj-utilities' }");
 
 const ${fnName} = require("../../${library}/${fnName}.js");
+const index = require("../../index.js");
 
 u.scope(__filename, x => {
     // TODO: Fix broken test
