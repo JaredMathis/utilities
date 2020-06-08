@@ -2,16 +2,16 @@ const u = require('../../index');
 const fs = require('fs');
 const path = require('path');
 
-u.scope(__filename, context => {
+u.scope(__filename, x => {
     const directory = path.join(__dirname, 'a');
 
-    u.merge(context, {directory});
+    u.merge(x, {directory});
     if (fs.existsSync(directory)) {
         u.deleteDirectory(directory);
     }
     u.assert(() => !fs.existsSync(directory));
 
-    u.merge(context, {step:'creating directory'});
+    u.merge(x, {step:'creating directory'});
     fs.mkdirSync(directory);
 
     let files = ['b.txt', 'c.txt'];

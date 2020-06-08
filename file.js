@@ -75,7 +75,9 @@ function copyFiles(fromDirectory, toDirectory) {
 }
 
 function deleteDirectory(directory) {
-    scope(deleteDirectory.name, context => {
+    scope(deleteDirectory.name, x => {
+        merge(x, {directory});
+        
         const fileNames = fs.readdirSync(directory);
 
         loop(fileNames, fileName => {

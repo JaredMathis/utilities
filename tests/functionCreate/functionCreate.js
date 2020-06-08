@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const u = require('../../index');
 const commands = require('../../commandLine');
+const {EOL} = require('os');
 
 const log = true;
 
@@ -18,15 +19,17 @@ u.scope(__filename, x => {
 
         commands.baseDirectory = __dirname;
 
-        let result = commands.fn(['a']);
+        let messages = [];
+        commands.functionCreate(['a'], messages);
+        let result = messages.join(EOL);
 
-        let expected = 'Created /Users/jared/Documents/GitHub/utilities/tests/fn/library\n' +
-        'Created /Users/jared/Documents/GitHub/utilities/tests/fn/library/a.js\n' +
-        'Created /Users/jared/Documents/GitHub/utilities/tests/fn/tests\n' +
-        'Created /Users/jared/Documents/GitHub/utilities/tests/fn/tests/a\n' +
-        'Created /Users/jared/Documents/GitHub/utilities/tests/fn/tests/a/a.js\n' +
-        'Created /Users/jared/Documents/GitHub/utilities/tests/fn/test.js\n' +
-        'Created /Users/jared/Documents/GitHub/utilities/tests/fn/index.js\n' +
+        let expected = 'Created /Users/jared/Documents/GitHub/utilities/tests/functionCreate/library\n' +
+        'Created /Users/jared/Documents/GitHub/utilities/tests/functionCreate/library/a.js\n' +
+        'Created /Users/jared/Documents/GitHub/utilities/tests/functionCreate/tests\n' +
+        'Created /Users/jared/Documents/GitHub/utilities/tests/functionCreate/tests/a\n' +
+        'Created /Users/jared/Documents/GitHub/utilities/tests/functionCreate/tests/a/1.js\n' +
+        'Created /Users/jared/Documents/GitHub/utilities/tests/functionCreate/test.js\n' +
+        'Created /Users/jared/Documents/GitHub/utilities/tests/functionCreate/index.js\n' +
         'Finished';
 
         if (result !== expected)
