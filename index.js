@@ -3,8 +3,8 @@
 module.exports = {};
 module.exports.merge = require("./library/merge.js");
 
-// let all = require('./all');
-// module.exports.merge(module.exports, all);
+let all = require('./all');
+module.exports.merge(module.exports, all);
 
 module.exports.throws = require("./library/throws.js");
 module.exports.assertIsJsonResponse = require("./library/assertIsJsonResponse.js");
