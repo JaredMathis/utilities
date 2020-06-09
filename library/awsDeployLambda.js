@@ -32,12 +32,14 @@ function deployAwsLambda(args) {
         if (lambdas.length === 0) {
             console.log(`Lambda ${lambdaName} does not exist. Creating.`);
             output = executeCommand(`aws lambda create-function --function-name ${lambdaName} --runtime nodejs12.x --role ${role} --handler index.${lambdaName} --zip-file fileb://${fileName}`);
-            console.log(output);
+            console.log(`Lambda ${lambdaName} created.`);
         } else {
+            console.log(`Lambda ${lambdaName} exists. Updating.`);
             output = executeCommand(`aws lambda update-function-code --function-name ${lambdaName} --zip-file fileb://${fileName}`);
-            console.log(output);
+            console.log(`Lambda ${lambdaName} updated.`);
         }
 
+        console.log('Deleting ' + fileName);
         fs.unlinkSync(fileName);
     });
     return result;
