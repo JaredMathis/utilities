@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const u = require('../../index');
-const commands = require('../../commandLine');
+const commands = require('../../library/commandLine');
 const {EOL} = require('os');
 
 const log = true;

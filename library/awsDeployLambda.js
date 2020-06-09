@@ -90,8 +90,16 @@ function awsDeployLambda(args) {
         
         executeCommand(`aws apigateway put-integration --rest-api-id ${apiId} --resource-id ${resourceId} --http-method POST --type AWS --integration-http-method POST --uri arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${lambda.FunctionArn}/invocations --credentials ${role}`);
         
-        executeCommand(`aws apigateway put-method-response --rest-api-id ${apiId} --resource-id ${resourceId} --http-method POST --status-code 200`);
-
+        try {
+            executeCommand(`aws apigateway put-method-response --rest-api-id ${apiId} --resource-id ${resourceId} --http-method POST --status-code 200`);
+        } catch (e) {
+            e = e.innerError || e;
+            let message = e.toString();
+            merge(x, {message});
+            merge(x, () => Object.keys(e));
+            assert(() => message.indexOf('An error occurred (ConflictException) when calling the PutMethodResponse operation: Response already exists for this resource') >= 0);
+        }
+        
         executeCommand(`aws apigateway put-integration-response --rest-api-id ${apiId} --resource-id ${resourceId} --http-method POST --status-code 200 --selection-pattern ""`);
 
         console.log("");

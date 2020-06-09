@@ -1,15 +1,15 @@
-const isString = require('./library/isString');
-const scope = require('./library/scope');
-const assert = require('./library/assert');
-const merge = require('./library/merge');
-const isArray = require('./library/isArray');
-const isInteger = require('./library/isInteger');
-const isUndefined = require('./library/isUndefined');
-const loop = require('./library/loop');
-const getAwsLambdaLogs = require('./library/getAwsLambdaLogs');
-const awsDeployLambda = require('./library/awsDeployLambda');
+const isString = require('./isString');
+const scope = require('./scope');
+const assert = require('./assert');
+const merge = require('./merge');
+const isArray = require('./isArray');
+const isInteger = require('./isInteger');
+const isUndefined = require('./isUndefined');
+const loop = require('./loop');
+const getAwsLambdaLogs = require('./getAwsLambdaLogs');
+const awsDeployLambda = require('./awsDeployLambda');
 const { deleteDirectory } = require('./file');
-const getLibraryDirectoryName = require('./library/getLibraryDirectoryName');
+const getLibraryDirectoryName = require('./getLibraryDirectoryName');
 
 const fs = require('fs');
 const path = require('path');
@@ -31,7 +31,8 @@ module.exports = {
     functionCreate,
     baseDirectory: '.',
     /** Whether or not this is the wlj-utilities NPM package */
-    isWljUtilitiesPackage: false
+    isWljUtilitiesPackage: false,
+    defaultCommands,
 };
 
 function commandLine(commands) {

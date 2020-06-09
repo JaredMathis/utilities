@@ -1,10 +1,18 @@
 
+const core = require('./library/core');
+const log = require('./library/log');
+const file = require('./library/file');
+const tools = require('./library/tools');
+const commandLine = require('./library/commandLine');
 
 module.exports = {};
 module.exports.merge = require("./library/merge.js");
 
-let all = require('./all');
-module.exports.merge(module.exports, all);
+module.exports.merge(module.exports, core);
+module.exports.merge(module.exports, log);
+module.exports.merge(module.exports, file);
+module.exports.merge(module.exports, tools);
+module.exports.merge(module.exports, commandLine);
 
 module.exports.throws = require("./library/throws.js");
 module.exports.assertIsJsonResponse = require("./library/assertIsJsonResponse.js");
@@ -48,3 +56,4 @@ module.exports.processExit = require("./library/processExit.js");
 module.exports.truncateStringTo = require("./library/truncateStringTo.js");
 module.exports.awsLambdaHelloWorld = require("./library/awsLambdaHelloWorld.js");
 module.exports.arrayWhere = require("./library/arrayWhere.js");
+module.exports.assertIsEqual = require("./library/assertIsEqual.js");

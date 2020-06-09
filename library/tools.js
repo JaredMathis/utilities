@@ -1,11 +1,11 @@
-const isInteger = require('./library/isInteger');
-const isDefined = require('./library/isDefined');
-const merge = require('./library/merge');
-const assert = require('./library/assert');
-const isArray = require('./library/isArray');
-const isString = require('./library/isString');
-const scope = require('./library/scope');
-const loop = require('./library/loop');
+const isInteger = require('./isInteger');
+const isDefined = require('./isDefined');
+const merge = require('./merge');
+const assert = require('./assert');
+const isArray = require('./isArray');
+const isString = require('./isString');
+const scope = require('./scope');
+const loop = require('./loop');
 
 module.exports = {
     toDictionary,

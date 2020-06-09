@@ -57,3 +57,5 @@ require("./tests/processExit/1.js");
 require("./tests/truncateStringTo/1.js");
 require("./tests/awsLambdaHelloWorld/1.js");
 require("./tests/arrayWhere/1.js");
+require("./tests/awsLambdaHelloWorld/2.js");
+require("./tests/assertIsEqual/1.js");

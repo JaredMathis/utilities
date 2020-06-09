@@ -9,7 +9,8 @@
   "dependencies": {
     "bignumber.js": "^9.0.0",
     "na-gaussian-elimination": "^1.0.0",
-    "rref": "0.0.1"
+    "rref": "0.0.1",
+    "sync-request": "^6.1.0"
   },
   "devDependencies": {},
   "scripts": {

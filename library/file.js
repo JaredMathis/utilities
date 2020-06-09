@@ -1,14 +1,10 @@
-const scope = require('./library/scope');
-const isString = require('./library/isString');
-const isDefined = require('./library/isDefined');
-const loop = require('./library/loop');
-const merge = require('./library/merge');
-const assert = require('./library/assert');
-
-const {
-    assertFileExists,
-    assertIsEqual,
-} = require('./assert');
+const scope = require('./scope');
+const isString = require('./isString');
+const isDefined = require('./isDefined');
+const loop = require('./loop');
+const merge = require('./merge');
+const assert = require('./assert');
+const assertIsEqual = require('./assertIsEqual');
 
 const fs = require('fs');
 const path = require('path');
