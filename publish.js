@@ -1,6 +1,4 @@
-const {
-    execSync,
-} = require("child_process");
+const executeCommand = require("./library/executeCommand");
 
 const u = require('./all');
 
@@ -9,6 +7,6 @@ require('./test');
 
 let bumped = u.bumpPackageVersion(__dirname);
 
-execSync('npm publish');
+executeCommand('npm publish');
 
 console.log('published ' + bumped);
