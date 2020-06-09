@@ -1,9 +1,10 @@
-let all = require('./all');
+
 
 module.exports = {};
 module.exports.merge = require("./library/merge.js");
 
-module.exports.merge(module.exports, all);
+// let all = require('./all');
+// module.exports.merge(module.exports, all);
 
 module.exports.throws = require("./library/throws.js");
 module.exports.assertIsJsonResponse = require("./library/assertIsJsonResponse.js");
@@ -41,3 +42,9 @@ module.exports.arraySequenceEquals = require("./library/arraySequenceEquals.js")
 module.exports.assertIsArray = require("./library/assertIsArray.js");
 module.exports.getAwsLambdaLogs = require("./library/getAwsLambdaLogs.js");
 module.exports.executeCommand = require("./library/executeCommand.js");
+module.exports.awsDeployLambda = require("./library/awsDeployLambda.js");
+module.exports.getLibraryDirectoryName = require("./library/getLibraryDirectoryName.js");
+module.exports.processExit = require("./library/processExit.js");
+module.exports.truncateStringTo = require("./library/truncateStringTo.js");
+module.exports.awsLambdaHelloWorld = require("./library/awsLambdaHelloWorld.js");
+module.exports.arrayWhere = require("./library/arrayWhere.js");

@@ -7,7 +7,6 @@ const {
 module.exports = {
     consoleLog,
     logProperties,
-    truncateStringTo,
 }
 
 // TODO: Validate arguments of framework
@@ -29,15 +28,6 @@ function getPrefix(offset) {
         prefix += tab;
     }
     return prefix;
-}
-
-function truncateStringTo(string, maxCharacters) {
-    let ellipses = "...";
-    if (string.length > maxCharacters) {
-        string = string.substring(0, maxCharacters - ellipses.length);
-        string += ellipses;
-    }
-    return string;
 }
 
 /**

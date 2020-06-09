@@ -7,13 +7,24 @@ const isInteger = require('./library/isInteger');
 const isUndefined = require('./library/isUndefined');
 const loop = require('./library/loop');
 const getAwsLambdaLogs = require('./library/getAwsLambdaLogs');
+const awsDeployLambda = require('./library/awsDeployLambda');
 const { deleteDirectory } = require('./file');
+const getLibraryDirectoryName = require('./library/getLibraryDirectoryName');
 
 const fs = require('fs');
 const path = require('path');
 const { EOL } = require('os');
 
 let verbose = false;
+
+const defaultCommands = {
+    functionCreate,
+    functionTest,
+    functionDelete,
+    functionRename,
+    getAwsLambdaLogs,
+    awsDeployLambda,
+}
 
 module.exports = {
     commandLine,
@@ -22,14 +33,6 @@ module.exports = {
     /** Whether or not this is the wlj-utilities NPM package */
     isWljUtilitiesPackage: false
 };
-
-const defaultCommands = {
-    functionCreate,
-    functionTest,
-    functionDelete,
-    functionRename,
-    getAwsLambdaLogs,
-}
 
 function commandLine(commands) {
     scope(commandLine.name, x => {
@@ -58,7 +61,7 @@ function commandLine(commands) {
     });
 }
 
-const library = 'library';
+const library = getLibraryDirectoryName();
 
 function getFunctionName(args, messages, i) {
     let result;
