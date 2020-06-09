@@ -12,7 +12,7 @@ function getAwsLambdaLogs(args, messages) {
     let result;
     scope(getAwsLambdaLogs.name, x => {
         assertIsArray(() => messages);
-        assert(() => args.length === 1);
+        assert(() => args.length >= 1);
 
         let lambdaName = args[0];
         let logGroupName = `/aws/lambda/${lambdaName}`;
@@ -34,7 +34,13 @@ function getAwsLambdaLogs(args, messages) {
         parsed = JSON.parse(json);
         parsed.events;
 
-        console.log(parsed.events);
+        if (args[1] === '--events') {
+            console.log(parsed.events);
+        } else {
+            for (let m of parsed.events.map(e => e.message)) {
+                messages.push(m);
+            }
+        }
     });
     return result;
 }
