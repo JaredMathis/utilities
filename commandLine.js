@@ -6,6 +6,7 @@ const isArray = require('./library/isArray');
 const isInteger = require('./library/isInteger');
 const isUndefined = require('./library/isUndefined');
 const loop = require('./library/loop');
+const getAwsLambdaLogs = require('./library/getAwsLambdaLogs');
 const { deleteDirectory } = require('./file');
 
 const fs = require('fs');
@@ -27,6 +28,7 @@ const defaultCommands = {
     functionTest,
     functionDelete,
     functionRename,
+    getAwsLambdaLogs,
 }
 
 function commandLine(commands) {
@@ -134,8 +136,8 @@ const ${fnName} = require("../../${library}/${fnName}.js");
 const index = require("../../index.js");
 
 u.scope(__filename, x => {
-// TODO: Fix broken test
-u.assert(false);
+    // TODO: Fix broken test
+    u.assert(false);
 });
 `);
     assert(() => fs.existsSync(testFile));

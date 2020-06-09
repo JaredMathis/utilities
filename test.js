@@ -49,3 +49,5 @@ require("./tests/unwrapIfLambda/unwrapIfLambda.js");
 require("./tests/assertIsStringArrayNested/assertIsStringArrayNested.js");
 require("./tests/arraySequenceEquals/arraySequenceEquals.js");
 require("./tests/assertIsArray/assertIsArray.js");
+require("./tests/getAwsLambdaLogs/1.js");
+require("./tests/executeCommand/1.js");

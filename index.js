@@ -39,3 +39,5 @@ module.exports.unwrapIfLambda = require("./library/unwrapIfLambda.js");
 module.exports.assertIsStringArrayNested = require("./library/assertIsStringArrayNested.js");
 module.exports.arraySequenceEquals = require("./library/arraySequenceEquals.js");
 module.exports.assertIsArray = require("./library/assertIsArray.js");
+module.exports.getAwsLambdaLogs = require("./library/getAwsLambdaLogs.js");
+module.exports.executeCommand = require("./library/executeCommand.js");
