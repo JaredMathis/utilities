@@ -5,15 +5,16 @@ const getUniqueFileName = require('./getUniqueFileName');
 const getLibraryDirectoryName = require('./getLibraryDirectoryName');
 const executeCommand = require('./executeCommand');
 const arrayWhere = require('./arrayWhere');
+const merge = require('./merge');
 const fs = require('fs');
 
 const role = 'arn:aws:iam::491701175555:role/service-role/sandbox-role-0p3p32vk'
 
-module.exports = deployAwsLambda;
+module.exports = awsDeployLambda;
 
-function deployAwsLambda(args) {
+function awsDeployLambda(args) {
     let result;
-    scope(deployAwsLambda.name, x => {
+    scope(awsDeployLambda.name, x => {
         let output;
         let parsed;
 
@@ -41,6 +42,60 @@ function deployAwsLambda(args) {
 
         console.log('Deleting ' + fileName);
         fs.unlinkSync(fileName);
+
+        output = executeCommand(`aws lambda list-functions`);
+        parsed = JSON.parse(output);
+        lambdas = arrayWhere(parsed.Functions, { FunctionName: lambdaName });
+        assert(() => lambdas.length === 1);
+        let lambda = lambdas[0];
+
+        try {
+            executeCommand(`aws lambda add-permission --function-name ${lambdaName} --action lambda:InvokeFunction --statement-id apigateway --principal apigateway.amazonaws.com`);
+        } catch (e) {
+            e = e.innerError || e;
+            let message = e.toString();
+            merge(x, {message});
+            merge(x, () => Object.keys(e));
+            assert(() => message.indexOf('The statement id (apigateway) provided already exists.') >= 0);
+        }
+
+        output = executeCommand(`aws apigateway get-rest-apis`)
+        parsed = JSON.parse(output);
+        let apis = arrayWhere(parsed.items, {name:lambdaName});
+        assert(() => apis.length <= 1);
+        if (apis.length === 0) {
+            console.log(`Api ${lambdaName} does not exist. Creating.`)
+            output = executeCommand(`aws apigateway create-rest-api --name ${lambdaName}`)
+            parsed = JSON.parse(output);
+            console.log(`Api ${lambdaName} created.`)
+        }
+
+        output = executeCommand(`aws apigateway get-rest-apis`)
+        parsed = JSON.parse(output);
+        apis = arrayWhere(parsed.items, {name:lambdaName});
+        assert(() => apis.length === 1);
+        let apiId = apis[0].id;
+
+        output = executeCommand(`aws apigateway get-resources --rest-api-id ${apiId}`)
+        parsed = JSON.parse(output);
+        assert(() => parsed.items.length === 1);
+        let resourceId = parsed.items[0].id;
+
+        try {
+            executeCommand(`aws apigateway get-method --rest-api-id ${apiId} --resource-id ${resourceId} --http-method POST`)
+        } catch (e) {
+            console.log('Method POST does not exist. Creating.')
+            executeCommand(`aws apigateway put-method --rest-api-id ${apiId} --resource-id ${resourceId} --http-method POST --authorization-type "NONE"`)
+        }
+        
+        executeCommand(`aws apigateway put-integration --rest-api-id ${apiId} --resource-id ${resourceId} --http-method POST --type AWS --integration-http-method POST --uri arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${lambda.FunctionArn}/invocations --credentials ${role}`);
+        
+        executeCommand(`aws apigateway put-method-response --rest-api-id ${apiId} --resource-id ${resourceId} --http-method POST --status-code 200`);
+
+        executeCommand(`aws apigateway put-integration-response --rest-api-id ${apiId} --resource-id ${resourceId} --http-method POST --status-code 200 --selection-pattern ""`);
+
+        console.log("");
+        console.log(`${awsDeployLambda.name} Lambda and Gateway deploy ${lambdaName} success!`);
     });
     return result;
 }
