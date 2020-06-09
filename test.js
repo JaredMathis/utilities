@@ -60,3 +60,5 @@ require("./tests/arrayWhere/1.js");
 require("./tests/awsLambdaHelloWorld/2.js");
 require("./tests/assertIsEqual/1.js");
 require("./tests/getAwsApiGatewayFileName/1.js");
+require("./tests/awsLambdaError/1.js");
+require("./tests/awsScope/1.js");

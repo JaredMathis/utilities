@@ -1,22 +1,20 @@
 
 const u = require("../../index");
+const request = require("sync-request");
 
-const awsLambdaHelloWorld = require("../../library/awsLambdaHelloWorld.js");
+const awsLambdaError = require("../../library/awsLambdaError.js");
 const index = require("../../index.js");
 
-const cl = require('../../library/commandLine');
-
-const request = require('sync-request');
-
 u.scope(__filename, x => {
-    let deploy = false;
+    let deploy = true;
+
     if (deploy) {
         console.log(__filename);
-        u.executeCommand(`node u awsDeployLambda ${awsLambdaHelloWorld.name}`);
+        u.executeCommand(`node u awsDeployLambda ${awsLambdaError.name}`);
     }
 
     let apigateway = require("./../../" + u.getAwsApiGatewayFileName());
-    let apiId = apigateway[awsLambdaHelloWorld.name]["default"];
+    let apiId = apigateway[awsLambdaError.name]["default"];
 
     let result = request('POST', `https://${apiId}.execute-api.us-east-1.amazonaws.com/prod`);
     let json = result.body.toString();
@@ -24,5 +22,7 @@ u.scope(__filename, x => {
     let parsed = JSON.parse(JSON.parse(json));
     u.merge(x, {parsed});
 
-    u.assertIsEqualJson(parsed, {"result":"Hello, World!"});
+    u.assert(() => parsed.success === false);
+    u.assert(() => u.isArray(parsed.messages));
+    u.assert(() => parsed.messages[0] === `${awsLambdaError.name} entered`);
 });

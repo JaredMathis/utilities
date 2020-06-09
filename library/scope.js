@@ -27,26 +27,28 @@ function scope(name, lambda) {
         count--;
 
         if (count === 0) {
+            let messages = [];
+
             let indent = '  ';
-            console.log(name + ' entered');
+            messages.push(name + ' entered');
             let properties = propertiesToString(x, indent);
             for (let p of properties) {
-                console.log(p);
+                messages.push(p);
             }
 
             let current = e;
             while ((current instanceof ScopeError)) {
-                console.log(indent + current.name + ' entered');
+                messages.push(indent + current.name + ' entered');
                 indent += '  '
                 let properties = propertiesToString(current.context, indent);
                 for (let p of properties) {
-                    console.log(p);
+                    messages.push(p);
                 }
                 current = current.innerError;
             }
-            if (config.log.scopeError) console.log(current);
+            //if (config.log.scopeError) console.log(current);
 
-            processExit();
+            throw new ScopeError(name, messages, current);
         } else {
             throw new ScopeError(name, x, e);
         }

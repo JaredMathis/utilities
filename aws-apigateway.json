@@ -1,5 +1,11 @@
 {
   "awsLambdaHelloWorld": {
     "default": "6x8usoeyjg"
+  },
+  "awsLambdaError": {
+    "default": "bmdrk2c1i5"
+  },
+  "_wrapLambda": {
+    "default": "qj5ozmj8ke"
   }
 }
