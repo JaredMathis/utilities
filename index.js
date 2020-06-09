@@ -57,3 +57,4 @@ module.exports.truncateStringTo = require("./library/truncateStringTo.js");
 module.exports.awsLambdaHelloWorld = require("./library/awsLambdaHelloWorld.js");
 module.exports.arrayWhere = require("./library/arrayWhere.js");
 module.exports.assertIsEqual = require("./library/assertIsEqual.js");
+module.exports.getAwsApiGatewayFileName = require("./library/getAwsApiGatewayFileName.js");

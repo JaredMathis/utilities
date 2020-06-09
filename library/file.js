@@ -19,6 +19,13 @@ module.exports = {
     bumpPackageVersion,
 }
 
+function assertFileExists(filePath) {
+    scope(assertFileExists.name, x => {
+        merge(x,{f: filePath});
+        assert(() => fs.existsSync(filePath))
+    });
+}
+
 function readFile(fileName) {
     return scope(readFile.name, context => {
         assertFileExists(fileName);
