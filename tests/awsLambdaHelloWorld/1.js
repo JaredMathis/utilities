@@ -9,5 +9,5 @@ u.scope(__filename, x => {
     let actual;
     awsLambdaHelloWorld(null,null,(a,b) => actual = b);
     u.merge(x,{actual});
-    u.assert(() => actual === "{\"success\":true,\"result\":\"Hello, World!\"}");
+    u.assertIsEqualJson(() => actual, () => JSON.stringify({"success":false,"messages":{}}));
 });
