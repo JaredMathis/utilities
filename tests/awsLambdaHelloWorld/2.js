@@ -9,7 +9,7 @@ const cl = require('../../library/commandLine');
 const request = require('sync-request');
 
 u.scope(__filename, x => {
-    let deploy = false;
+    let deploy = true;
     if (deploy) {
         console.log(__filename);
         u.executeCommand(`node u awsDeployLambda ${awsLambdaHelloWorld.name}`);
@@ -24,5 +24,5 @@ u.scope(__filename, x => {
     let parsed = JSON.parse(JSON.parse(json));
     u.merge(x, {parsed});
 
-    u.assertIsEqualJson(parsed, {"result":"Hello, World!"});
+    u.assertIsEqualJson(parsed, {"success":true,"result":"Hello, World!"});
 });

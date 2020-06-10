@@ -1,12 +1,10 @@
 
-const scope = require("./scope");
+const awsScope = require("./awsScope");
 
 module.exports = awsLambdaHelloWorld;
 
 function awsLambdaHelloWorld(event, context, callback) {
-    let result;
-    scope(awsLambdaHelloWorld.name, x => {
-        result = 'Hello, World!';
-    });
-    return callback(null, JSON.stringify({result}));
+    awsScope(awsLambdaHelloWorld.name, x => {
+        return 'Hello, World!';
+    }, callback);
 }
