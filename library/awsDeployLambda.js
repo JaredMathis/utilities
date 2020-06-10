@@ -26,7 +26,8 @@ function awsDeployLambda(args) {
         let fileName = getUniqueFileName('temp.zip');
 
         console.log('Zipping library and index.js to ' + fileName);
-        output = executeCommand(`zip -r ${fileName} index.js ${getLibraryDirectoryName()}/`);
+
+        output = executeCommand(`zip -r ${fileName} index.js node_modules ${getLibraryDirectoryName()}/`);
 
         output = executeCommand(`aws lambda list-functions`);
         parsed = JSON.parse(output);
