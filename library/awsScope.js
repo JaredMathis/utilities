@@ -5,21 +5,25 @@ const assert = require("./assert");
 
 module.exports = awsScope;
 
-function awsScope(name, lambda, callback) {
+async function awsScope(lambda, callback) {
+    let context = {};
     try {
-        scope(name, x => {
-            assert(() => isFunction(callback));
+        assert(() => isFunction(callback));
+        
+        let promise = lambda(context);
 
-            let result = lambda(x);
-            callback(null, JSON.stringify({
-                success: true,
-                result
-            }))
-        });
+        let result = await Promise.resolve(promise)
+
+        callback(null, JSON.stringify({
+            success: true,
+            result,
+        }))
     } catch (e) {
         callback(null, JSON.stringify({
             success: false,
-            messages: e.context
+            context,
+            error: e.toString(),
+            stack: e.stack,
         }));
     }
 }

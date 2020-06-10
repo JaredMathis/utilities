@@ -4,10 +4,21 @@ const u = require("../../index");
 const awsLambdaHelloWorld = require("../../library/awsLambdaHelloWorld.js");
 const index = require("../../index.js");
 
-u.scope(__filename, x => {
+run();
+
+async function run() {
     // TODO: Fix broken test
     let actual;
-    awsLambdaHelloWorld(null,null,(a,b) => actual = b);
-    u.merge(x,{actual});
-    u.assertIsEqualJson(() => actual, () => JSON.stringify({"success":false,"messages":{}}));
-});
+    let count = 0;
+    await awsLambdaHelloWorld({},null,(a,b) => {
+        count++;
+        actual = b;
+    });
+    try {
+        u.assertIsEqualJson(1, () => count);
+        u.assertIsEqualJson(() => actual, () => '{"success":true,"result":"Hello, World!"}');
+    } catch (e) {
+        console.log({count,actual})
+        throw e;
+    }
+}
