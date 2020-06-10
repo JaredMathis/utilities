@@ -62,3 +62,4 @@ require("./tests/assertIsEqual/1.js");
 require("./tests/getAwsApiGatewayFileName/1.js");
 require("./tests/awsLambdaError/1.js");
 require("./tests/awsScope/1.js");
+require("./tests/awsLambdaApiCall/1.js");

@@ -10,19 +10,14 @@ const request = require('sync-request');
 
 u.scope(__filename, x => {
     let deploy = true;
+
+    console.log(__filename);
     if (deploy) {
-        console.log(__filename);
         u.executeCommand(`node u awsDeployLambda ${awsLambdaHelloWorld.name}`);
     }
 
     let apigateway = require("./../../" + u.getAwsApiGatewayFileName());
-    let apiId = apigateway[awsLambdaHelloWorld.name]["default"];
-
-    let result = request('POST', `https://${apiId}.execute-api.us-east-1.amazonaws.com/prod`);
-    let json = result.body.toString();
-    u.merge(x, {json});
-    let parsed = JSON.parse(JSON.parse(json));
-    u.merge(x, {parsed});
+    let parsed = u.awsLambdaApiCall(apigateway, awsLambdaHelloWorld.name);
 
     u.assertIsEqualJson(parsed, {"success":true,"result":"Hello, World!"});
 });

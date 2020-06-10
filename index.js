@@ -60,3 +60,4 @@ module.exports.assertIsEqual = require("./library/assertIsEqual.js");
 module.exports.getAwsApiGatewayFileName = require("./library/getAwsApiGatewayFileName.js");
 module.exports.awsLambdaError = require("./library/awsLambdaError.js");
 module.exports.awsScope = require("./library/awsScope.js");
+module.exports.awsLambdaApiCall = require("./library/awsLambdaApiCall.js");
