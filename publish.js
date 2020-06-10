@@ -1,6 +1,6 @@
 const executeCommand = require("./library/executeCommand");
 
-const u = require('./all');
+const u = require('./index');
 
 // Run tests before bumping.
 require('./test');
