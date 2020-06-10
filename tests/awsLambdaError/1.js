@@ -6,13 +6,6 @@ const awsLambdaError = require("../../library/awsLambdaError.js");
 const index = require("../../index.js");
 
 u.scope(__filename, x => {
-    let deploy = true;
-
-    console.log(__filename);
-    if (deploy) {
-        u.executeCommand(`node u awsDeployLambda ${awsLambdaError.name}`);
-    }
-
     let apigateway = require("./../../" + u.getAwsApiGatewayFileName());
     let parsed = u.awsLambdaApiCall(apigateway, awsLambdaError.name);
 

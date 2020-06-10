@@ -8,19 +8,24 @@ const request = require("sync-request");
 
 module.exports = awsLambdaApiCall;
 
-function awsLambdaApiCall(apigateway, lambdaName) {
+function awsLambdaApiCall(apigateway, lambdaName, jsonBody) {
     let result;
     scope(awsLambdaApiCall.name, x => {
-        merge(x, {lambdaName});
+        merge(x, { lambdaName });
         assertIsString(() => lambdaName);
 
         let apiId = apigateway[lambdaName]["default"];
-    
-        let response = request('POST', `https://${apiId}.execute-api.us-east-1.amazonaws.com/prod`);
+
+        let response = request(
+            'POST',
+            `https://${apiId}.execute-api.us-east-1.amazonaws.com/prod`,
+            {
+                json: jsonBody || {},
+            });
         let json = response.body.toString();
-        merge(x, {json});
+        merge(x, { json });
         let parsed = JSON.parse(JSON.parse(json));
-        merge(x, {parsed});
+        merge(x, { parsed });
 
         assert(() => isDefined(parsed));
         result = parsed;
