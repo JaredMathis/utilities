@@ -61,3 +61,4 @@ module.exports.getAwsApiGatewayFileName = require("./library/getAwsApiGatewayFil
 module.exports.awsLambdaError = require("./library/awsLambdaError.js");
 module.exports.awsScope = require("./library/awsScope.js");
 module.exports.awsLambdaApiCall = require("./library/awsLambdaApiCall.js");
+module.exports.isGuid = require("./library/isGuid.js");

@@ -18,7 +18,7 @@ async function run() {
         u.assertIsEqualJson(1, () => count);
         u.assertIsEqualJson(() => actual, () => '{"success":true,"result":"Hello, World!"}');
     } catch (e) {
-        console.log({count,actual})
+        console.log({__filename,count,actual})
         throw e;
     }
 }
