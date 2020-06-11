@@ -24,7 +24,14 @@ function awsLambdaApiCall(apigateway, lambdaName, jsonBody) {
             });
         let json = response.body.toString();
         merge(x, { json });
-        let parsed = JSON.parse(JSON.parse(json));
+        let parsed = JSON.parse(json);
+        merge(x, { parsed });
+        try {
+            parsed = JSON.parse(parsed);
+        } catch (e) {
+            console.log(__filename,{parsed});
+            throw e;
+        }
         merge(x, { parsed });
 
         assert(() => isDefined(parsed));

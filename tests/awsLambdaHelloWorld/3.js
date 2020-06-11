@@ -8,5 +8,5 @@ u.scope(__filename, x => {
     let apigateway = require("./../../" + u.getAwsApiGatewayFileName());
     let parsed = u.awsLambdaApiCall(apigateway, awsLambdaHelloWorld.name, {name:'Jared'});
 
-    u.assertIsEqualJson(parsed, {"success":true,"result":"Hello, Jared"});
+    u.assertIsEqualJson(parsed, {"success":true,"context":{},"result":"Hello, Jared"});
 });

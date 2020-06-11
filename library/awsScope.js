@@ -16,14 +16,18 @@ async function awsScope(lambda, callback) {
 
         callback(null, JSON.stringify({
             success: true,
+            context,
             result,
         }))
     } catch (e) {
         callback(null, JSON.stringify({
             success: false,
             context,
-            error: e.toString(),
-            stack: e.stack,
+            error: {
+                string: e.toString(),
+                stack: e.stack,
+                e,
+            }
         }));
     }
 }

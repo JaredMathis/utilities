@@ -7,7 +7,6 @@ const index = require("../../index.js");
 run();
 
 async function run() {
-    // TODO: Fix broken test
     let actual;
     let count = 0;
     await awsLambdaHelloWorld({},null,(a,b) => {
@@ -16,7 +15,7 @@ async function run() {
     });
     try {
         u.assertIsEqualJson(1, () => count);
-        u.assertIsEqualJson(() => actual, () => '{"success":true,"result":"Hello, World!"}');
+        u.assertIsEqualJson(() => actual, () => '{"success":true,"context":{},"result":"Hello, World!"}');
     } catch (e) {
         console.log({__filename,count,actual})
         throw e;
