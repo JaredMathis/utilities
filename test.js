@@ -66,3 +66,5 @@ require("./tests/awsLambdaApiCall/1.js");
 require("./tests/awsLambdaHelloWorld/3.js");
 require("./tests/isGuid/1.js");
 require("./tests/padNumber/1.js");
+require("./tests/isGuid/2.js");
+require("./tests/assertIsString/1.js");
