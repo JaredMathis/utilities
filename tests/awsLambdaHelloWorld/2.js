@@ -10,7 +10,7 @@ const request = require('sync-request');
 
 u.scope(__filename, x => {
     let apigateway = require("./../../" + u.getAwsApiGatewayFileName());
-    let parsed = u.awsLambdaApiCall(apigateway, awsLambdaHelloWorld.name);
+    let parsed = u.awsLambdaApiCall(apigateway, awsLambdaHelloWorld.name, {}, x);
 
     u.assertIsEqualJson(parsed, {"success":true,"context":{},"result":"Hello, World!"});
 });

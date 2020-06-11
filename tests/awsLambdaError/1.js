@@ -7,7 +7,7 @@ const index = require("../../index.js");
 
 u.scope(__filename, x => {
     let apigateway = require("./../../" + u.getAwsApiGatewayFileName());
-    let parsed = u.awsLambdaApiCall(apigateway, awsLambdaError.name);
+    let parsed = u.awsLambdaApiCall(apigateway, awsLambdaError.name, {}, x);
     u.merge(x, parsed);
 
     u.assert(() => parsed.success === false);
