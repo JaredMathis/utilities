@@ -38,25 +38,8 @@ function awsLambdaApiCall(apigateway, lambdaName, jsonBody, context) {
         assert(() => isDefined(parsed));
         result = parsed;
 
-        merge(context, { parsed });
-        if (parsed.error) {
-            merge(context, () => parsed.error);
-            merge(context, () => Object.keys(parsed.error));
-            merge(context, () => parsed.error.stack);
-            merge(context, () => parsed.error.string);
-            if (parsed.error.stack || parsed.error.string) {
-                console.log(__filename);
-                if (parsed.error.stack)
-                    console.log('parsed.error.stack', parsed.error.stack);
-                if (parsed.error.string)
-                    console.log('parsed.error.string', parsed.error.string);
-            }
-            if (parsed.error.e) {
-                merge(context, () => parsed.error.e);
-                if (parsed.error.e.context) {
-                    merge(context, () => parsed.error.e.context);
-                }
-            }
+        if (parsed.success === false) {
+            console.log(JSON.stringify({parsed}, null, 2));
         }
     });
     return result;
