@@ -202,12 +202,14 @@ function functionCreate(args, messages) {
         assert(() => !fs.existsSync(fnFile));
         fs.writeFileSync(fnFile, `
 ${module.exports.isWljUtilitiesPackage ? 'const scope = require("./scope");' : 'const u = require("wlj-utilities");'}
+${module.exports.isWljUtilitiesPackage ? 'const args = require("./args");' : '' }
 
 module.exports = ${fnName};
 
 function ${fnName}() {
     let result;
     ${module.exports.isWljUtilitiesPackage ? '' : 'u.'}scope(${fnName}.name, x => {
+        ${module.exports.isWljUtilitiesPackage ? '' : 'u.'}args(arguments);
         // TODO
     });
     return result;

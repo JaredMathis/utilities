@@ -68,3 +68,4 @@ require("./tests/isGuid/1.js");
 require("./tests/padNumber/1.js");
 require("./tests/isGuid/2.js");
 require("./tests/assertIsString/1.js");
+require("./tests/args/1.js");
